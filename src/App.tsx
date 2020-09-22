@@ -31,11 +31,11 @@ class InputField extends React.Component<{}, { nameValue: string, showingGreetin
 }
 
 class Logo extends React.Component {
-  logoSVG = <img src={logo} alt={"React logo"} width={500}></img>;
+  logoSVG = <img className="logo" src={logo} alt={"React logo"} width={500}></img>;
 
   render() {
     return (
-      <div className="logo">{this.logoSVG}</div>
+      <div>{this.logoSVG}</div>
     );
   }
 }
