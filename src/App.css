@@ -1,23 +1,36 @@
-.nameText, .inputField, .submitButton {
+.nameText {
     color: #e76f51;
-    margin-left: 25px;
+    text-align: center;
 }
 
 .inputField {
+    display: block;
+    margin: auto;
+    padding: 1px;
+    color: #e76f51;
     border: 1px solid #e76f51;
 }
 
 .submitButton {
+    display: block;
+    margin: auto;
     padding: 5px;
-    border: 0px;
+    border: 1px;
+    color: #e76f51;
     background-color: #fcbf49;
 }
 
+.span {
+    padding: 1px;
+}
+
 .greeting {
-    color: #e9c46a;
+    color: #9a031e;
+    text-align: center;
 }
 
 .logo {
     display: block;
     margin: auto;
+    background-color: darkslategray;
 }
