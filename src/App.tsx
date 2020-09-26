@@ -1,41 +1,66 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { channelsNames } from "./channelsNames";
+import { ChannelEntry } from "./ChannelEntry";
+import { API_KEY } from "./BotAPI";
+import "./App.css";
 
-function Greeting(props: any) {
-  return <h1 className="greeting">Hello {props.name}!</h1>;
+let channels: ChannelEntry[] = [];
+
+function populateChannelsArray(): void {
+  // Function responsible of correctly initialize above "channels" array
+  for (let channelName of channelsNames) {
+    let newChannel: ChannelEntry = {
+      title: "",
+      link: "",
+      description: "",
+      pictureID: "",
+      subscribers: 0
+    };
+
+    newChannel.title = channelName;
+    //getFormalName(channelName).then(r => newChannel.title = r);
+    newChannel.link = `https://t.me/${channelName}`;
+    //getPictureID(channelName).then(r => newChannel.pictureID = r);
+
+    channels.push(newChannel);
+  }
+
+  function getFormalName(channelName: string): Promise<string> {
+    return fetch(`https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`)
+      .then(r => r.json())
+      .then((r) => { return r.result.title; })
+  }
+
+  function getPictureID(channelName: string): Promise<string> {
+    return fetch(`https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`)
+      .then(r => r.json())
+      .then((r) => { return r.result.photo.big_file_id; })
+  }
 }
 
-function InputField() {
-  let [nameValue, updateState] = useState<string>('');
-  let [showingGreetings, toggleGreetings] = useState<boolean>(false);
+function compare(a: ChannelEntry, b: ChannelEntry) {
+  if (a.subscribers < b.subscribers) return -1;
+  else if (a.subscribers > b.subscribers) return 1;
+  return 0;
+}
+
+function RenderChannels() {
+  channels.sort(compare);
+  let key: number = 0;
 
   return (
     <div>
-      <h2 className="nameText">Insert your name below</h2>
-      <input className="inputField" autoFocus={true} onChange={(e) => updateState(nameValue = e.target.value)}></input>
-      <span className="span"></span>
-      <button className="submitButton" onClick={() => toggleGreetings(showingGreetings = true)}>Submit</button>
-      <span className="span"></span>
-      {showingGreetings && <Greeting name={nameValue} />}
+      {channels.map((channel) => <ul className="channelsList" key={key++}>
+        <a className="channelsLinks" href={channel.link}><h1>{channel.title}</h1></a>
+      </ul>)}
     </div>
-  );
-}
-
-function Logo() {
-  let logoSVG = <img className="logo" src={logo} alt={"React logo"} width={500}></img>;
-
-  return (
-    <div>{logoSVG}</div>
   );
 }
 
 function App() {
+  populateChannelsArray();
   return (
-    <div>
-      <InputField />
-      <Logo />
-    </div>
+    <RenderChannels />
   );
 }
 
