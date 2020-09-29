@@ -8,6 +8,7 @@ function Channels(): JSX.Element {
   const [channelsArray, setChannelsArray] = useState<ChannelEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const promises: Promise<any>[] = [];
+  const promisesPictures: Promise<any>[] = [];
 
   useEffect(() => {
     function getData(channelName: string): void {
@@ -25,8 +26,10 @@ function Channels(): JSX.Element {
           newChannel.title = data.result.title;
           newChannel.link = `https://t.me/${channelName}`;
           newChannel.description = data.result.description ? data.result.description : "";
-          newChannel.pictureID = data.result.photo.big_file_id;
-          setChannelsArray((before) => [...before, newChannel]);
+          promisesPictures.push(fetch(`https://api.telegram.org/bot${API_KEY}/getFile?file_id=${data.result.photo.big_file_id}`)
+            .then(res => res.json())
+            .then(data => newChannel.pictureID = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
+          )
         })
       );
 
@@ -48,10 +51,12 @@ function Channels(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises).then(() => {
-      channelsArray.sort(compare);
-      setLoading(false);
-    });
+    Promise.all(promises).then(() =>
+      Promise.all(promisesPictures)
+        .then(() => {
+          setLoading(false);
+        })
+    );
   }, []);
 
   let key: number = 0;
@@ -71,7 +76,10 @@ function Card(props: any): JSX.Element {
   return (
     <ul key={props.id}>
       <div>
-        <img src={props.pictureID} alt={props.title + " picture"} width="200" height="200" />
+        <a href={props.link}>
+          <img src={props.picture} alt={props.title + " picture"} width="200" height="200" />
+        </a>
+        <br />
         <a className="channelsLinks" href={props.link}><h1>{props.title}</h1></a>
         <h3 className="description">{props.description}</h3>
         <p className="subscribers">Subscribers: {props.subscribers}</p>
