@@ -4,55 +4,75 @@ import { ChannelEntry } from "./ChannelEntry";
 import { API_KEY } from "./BotAPI";
 import "./App.css";
 
-function Channels() {
-  let channelsArray: ChannelEntry[] = [];
+function Channels(): any {
+  const [channelsArray, updateChannelsArray] = useState<ChannelEntry[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const promises: Promise<any>[] = [];
 
-  for (let channelName of channelsNames) {
-    let newChannel: ChannelEntry = {
-      title: "",
-      link: `https://t.me/${channelName}`,
-      description: "",
-      pictureID: "",
-      subscribers: 0
-    };
+  useEffect(() => {
+    function getData(channelName: string): void {
+      let newChannel: ChannelEntry = {
+        title: "",
+        link: "",
+        description: "",
+        pictureID: "",
+        subscribers: 0
+      };
 
-    getFormalName(channelName).then(r => newChannel.title = r);
-    getPictureID(channelName).then(r => newChannel.pictureID = r);
+      promises.push(fetch(`https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`)
+        .then(res => res.json())
+        .then(data => {
+          newChannel.title = data.result.title;
+          newChannel.link = `https://t.me/${channelName}`;
+          newChannel.description = data.result.description ? data.result.description : "";
+          newChannel.pictureID = data.result.photo.big_file_id;
+          updateChannelsArray((before) => [...before, newChannel]);
+        })
+      );
+    }
 
-    Promise.all([getFormalName, getPictureID]).then(() => channelsArray.push(newChannel));
-  }
+    for (let channel of channelsNames) {
+      getData(channel);
+    }
 
-  async function getFormalName(channelName: string): Promise<string> {
-    const r = await fetch(`https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`);
-    const r_1 = await r.json();
-    return r_1.result.title;
-  }
+    function compare(a: ChannelEntry, b: ChannelEntry): number {
+      if (a.subscribers < b.subscribers) return -1;
+      else if (a.subscribers > b.subscribers) return 1;
+      return 0;
+    }
 
-  async function getPictureID(channelName: string): Promise<string> {
-    const r = await fetch(`https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`);
-    const r_1 = await r.json();
-    return r_1.result.photo.big_file_id;
-  }
-
-  function compare(a: ChannelEntry, b: ChannelEntry) {
-    if (a.subscribers < b.subscribers) return -1;
-    else if (a.subscribers > b.subscribers) return 1;
-    return 0;
-  }
-  channelsArray.sort(compare);
-  console.log(channelsArray);
+    Promise.all(promises).then(() => {
+      channelsArray.sort(compare);
+      setLoading(false);
+    });
+  }, []);
 
   let key: number = 0;
   return (
     <div>
-      {channelsArray.map((channel) => <ul className="channelsList" key={key++}>
-        <a className="channelsLinks" href={channel.link}><h1>{channel.title}</h1></a>
-      </ul>)}
+      {
+        loading ?
+          <h1 className="loadingText">Loading...</h1> :
+          channelsArray.map((channel) =>
+            <Card id={key++} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} />)
+      }
     </div>
   );
 }
 
-function App() {
+function Card(props: any): any {
+  return (
+    <ul key={props.id}>
+      <div>
+        <a className="channelsLinks" href={props.link}><h1>{props.title}</h1></a>
+        <h3 className="description">{props.description}</h3>
+        <p className="subscribers">Subscribers: {props.subscribers}</p>
+      </div>
+    </ul>
+  );
+}
+
+function App(): any {
   return <Channels />
 }
 
