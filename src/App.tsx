@@ -4,8 +4,8 @@ import { ChannelEntry } from "./ChannelEntry";
 import { API_KEY } from "./BotAPI";
 import "./App.css";
 
-function Channels(): any {
-  const [channelsArray, updateChannelsArray] = useState<ChannelEntry[]>([]);
+function Channels(): JSX.Element {
+  const [channelsArray, setChannelsArray] = useState<ChannelEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const promises: Promise<any>[] = [];
 
@@ -26,12 +26,12 @@ function Channels(): any {
           newChannel.link = `https://t.me/${channelName}`;
           newChannel.description = data.result.description ? data.result.description : "";
           newChannel.pictureID = data.result.photo.big_file_id;
-          updateChannelsArray((before) => [...before, newChannel]);
+          setChannelsArray((before) => [...before, newChannel]);
         })
       );
     }
 
-    for (let channel of channelsNames) {
+    for (const channel of channelsNames) {
       getData(channel);
     }
 
@@ -60,7 +60,7 @@ function Channels(): any {
   );
 }
 
-function Card(props: any): any {
+function Card(props: any): JSX.Element {
   return (
     <ul key={props.id}>
       <div>
@@ -72,7 +72,7 @@ function Card(props: any): any {
   );
 }
 
-function App(): any {
+function App(): JSX.Element {
   return <Channels />
 }
 
