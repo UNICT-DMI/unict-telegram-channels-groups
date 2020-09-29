@@ -1,8 +1,33 @@
-.channelsList {
+html {
+    background-color: #212529;
+}
+
+.loadingText {
+    text-align: center;
+    color: white;
+}
+
+ul {
     display: inline-block;
+    justify-content: space-between;
+    vertical-align: top;
+    width: 25%;
+    height: auto;
+    padding: 25px;
+    margin: 25px;
+    background-color: #343a40;
 }
 
 .channelsLinks {
+    display: inline-block;
     text-decoration: none;
-    color: #264653;
+    color: lightblue;
+}
+
+.description {
+    color: white;
+}
+
+.subscribers {
+    color: lightgreen;
 }
