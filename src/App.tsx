@@ -29,6 +29,13 @@ function Channels(): JSX.Element {
           setChannelsArray((before) => [...before, newChannel]);
         })
       );
+
+      promises.push(fetch(`https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`)
+        .then(res => res.json())
+        .then(data => newChannel.subscribers = data.result)
+      );
+
+      setChannelsArray((before) => [...before, newChannel]);
     }
 
     for (const channel of channelsNames) {
@@ -64,6 +71,7 @@ function Card(props: any): JSX.Element {
   return (
     <ul key={props.id}>
       <div>
+        <img src={props.pictureID} alt={props.title + " picture"} width="200" height="200" />
         <a className="channelsLinks" href={props.link}><h1>{props.title}</h1></a>
         <h3 className="description">{props.description}</h3>
         <p className="subscribers">Subscribers: {props.subscribers}</p>
