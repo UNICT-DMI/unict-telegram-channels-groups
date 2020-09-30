@@ -15,12 +15,31 @@ ul {
     height: auto;
     padding: 25px;
     margin: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 1rem #669999;
     background-color: #343a40;
+    transition: .3s;
+}
+
+ul:nth-child(1):hover {
+    background-color: #808000;
+}
+
+ul:nth-child(2):hover {
+    background-color: #808080;
+}
+
+ul:nth-child(3):hover {
+    background-color: #663300;
+}
+
+ul:hover {
+    background-color: #343a50;
+    transform: translateY(-1rem);
 }
 
 .channelsLinks {
     display: inline-block;
-    text-decoration: none;
     color: lightblue;
 }
 
@@ -29,5 +48,17 @@ ul {
 }
 
 .subscribers {
+    color: lightgreen;
+}
+
+.imageAndPosition {
+    display: flex;
+    justify-content: space-between;
+}
+
+.position {
+    font-family: Verdana, serif, sans-serif;
+    font-size: 40px;
+    padding: 10px;
     color: lightgreen;
 }
