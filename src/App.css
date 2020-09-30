@@ -4,7 +4,6 @@ html {
 
 .loadingText {
     text-align: center;
-    vertical-align: middle;
     color: white;
 }
 
@@ -17,6 +16,22 @@ ul {
     padding: 25px;
     margin: 25px;
     background-color: #343a40;
+}
+
+ul:nth-child(1):hover {
+    background-color: #555500;
+}
+
+ul:nth-child(2):hover {
+    background-color: #6c757d;
+}
+
+ul:nth-child(3):hover {
+    background-color: #3d2c1d;
+}
+
+ul:hover {
+    background-color: #343a50;
 }
 
 .channelsLinks {

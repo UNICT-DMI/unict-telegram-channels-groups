@@ -39,9 +39,8 @@ function Channels(): JSX.Element {
       promisesMembers.push(fetch(`https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`)
         .then(res => res.json())
         .then(data => newChannel.subscribers = data.result)
+        .then(() => sortedArray.push(newChannel))
       );
-
-      sortedArray.push(newChannel);
     }
 
     for (const channel of channelsNames) {
@@ -72,7 +71,7 @@ function Channels(): JSX.Element {
         loading ?
           <h1 className="loadingText">Loading...</h1> :
           channelsArray.map((channel) =>
-            <Card id={key++} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} />)
+            <Card key={key++} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} />)
       }
     </div>
   );
@@ -80,7 +79,7 @@ function Channels(): JSX.Element {
 
 function Card(props: any): JSX.Element {
   return (
-    <ul key={props.id}>
+    <ul>
       <div>
         <a href={props.link}>
           <img src={props.picture} alt={props.title + " picture"} width="200" height="200" />
