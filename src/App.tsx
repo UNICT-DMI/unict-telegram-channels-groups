@@ -71,7 +71,7 @@ function Channels(): JSX.Element {
         loading ?
           <h1 className="loadingText">Loading...</h1> :
           channelsArray.map((channel) =>
-            <Card key={key++} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} />)
+            <Card key={key++} id={key} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} />)
       }
     </div>
   );
@@ -81,9 +81,12 @@ function Card(props: any): JSX.Element {
   return (
     <ul>
       <div>
-        <a href={props.link}>
-          <img src={props.picture} alt={props.title + " picture"} width="200" height="200" />
-        </a>
+        <div className="imageAndPosition">
+          <a href={props.link}>
+            <img src={props.picture} alt={props.title + " picture"} width="200" height="200" />
+          </a>
+          <p className="position">{props.id}°</p>
+        </div>
         <br />
         <a className="channelsLinks" href={props.link}><h1>{props.title}</h1></a>
         <h3 className="description">{props.description}</h3>
