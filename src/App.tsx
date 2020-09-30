@@ -9,10 +9,13 @@ function Channels(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true);
   const promises: Promise<any>[] = [];
   const promisesPictures: Promise<any>[] = [];
+  const promisesMembers: Promise<any>[] = [];
 
   useEffect(() => {
+    const sortedArray: ChannelEntry[] = [];
+
     function getData(channelName: string): void {
-      let newChannel: ChannelEntry = {
+      const newChannel: ChannelEntry = {
         title: "",
         link: "",
         description: "",
@@ -33,12 +36,12 @@ function Channels(): JSX.Element {
         })
       );
 
-      promises.push(fetch(`https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`)
+      promisesMembers.push(fetch(`https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`)
         .then(res => res.json())
         .then(data => newChannel.subscribers = data.result)
       );
 
-      setChannelsArray((before) => [...before, newChannel]);
+      sortedArray.push(newChannel);
     }
 
     for (const channel of channelsNames) {
@@ -46,16 +49,19 @@ function Channels(): JSX.Element {
     }
 
     function compare(a: ChannelEntry, b: ChannelEntry): number {
-      if (a.subscribers < b.subscribers) return -1;
-      else if (a.subscribers > b.subscribers) return 1;
+      if (a.subscribers < b.subscribers) return 1;
+      else if (a.subscribers > b.subscribers) return -1;
       return 0;
     }
 
     Promise.all(promises).then(() =>
-      Promise.all(promisesPictures)
-        .then(() => {
+      Promise.all(promisesPictures).then(() =>
+        Promise.all(promisesMembers).then(() => {
+          sortedArray.sort(compare);
+          setChannelsArray(sortedArray);
           setLoading(false);
         })
+      )
     );
   }, []);
 

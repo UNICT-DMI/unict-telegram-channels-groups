@@ -4,6 +4,7 @@ html {
 
 .loadingText {
     text-align: center;
+    vertical-align: middle;
     color: white;
 }
 
