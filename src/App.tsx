@@ -20,26 +20,40 @@ function Channels(): JSX.Element {
         link: "",
         description: "",
         pictureID: "",
-        subscribers: 0
+        subscribers: 0,
       };
 
-      promises.push(fetch(`https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`)
-        .then(res => res.json())
-        .then(data => {
-          newChannel.title = data.result.title;
-          newChannel.link = `https://t.me/${channelName}`;
-          newChannel.description = data.result.description ? data.result.description : "";
-          promisesPictures.push(fetch(`https://api.telegram.org/bot${API_KEY}/getFile?file_id=${data.result.photo.big_file_id}`)
-            .then(res => res.json())
-            .then(data => newChannel.pictureID = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
-          )
-        })
+      promises.push(
+        fetch(
+          `https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            newChannel.title = data.result.title;
+            newChannel.link = `https://t.me/${channelName}`;
+            newChannel.description = data.result.description
+              ? data.result.description
+              : "";
+            promisesPictures.push(
+              fetch(
+                `https://api.telegram.org/bot${API_KEY}/getFile?file_id=${data.result.photo.big_file_id}`
+              )
+                .then((res) => res.json())
+                .then(
+                  (data) =>
+                    (newChannel.pictureID = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
+                )
+            );
+          })
       );
 
-      promisesMembers.push(fetch(`https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`)
-        .then(res => res.json())
-        .then(data => newChannel.subscribers = data.result)
-        .then(() => sortedArray.push(newChannel))
+      promisesMembers.push(
+        fetch(
+          `https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`
+        )
+          .then((res) => res.json())
+          .then((data) => (newChannel.subscribers = data.result))
+          .then(() => sortedArray.push(newChannel))
       );
     }
 
@@ -66,49 +80,56 @@ function Channels(): JSX.Element {
 
   let key: number = 0;
   return (
-    <div className="mainContent">
-      {
-        loading ?
-          <h1 className="loadingText">Loading...</h1> : (
-            <div>
-              <h1 className="rankingTitle">Classifica canali UNICT</h1>
-              {channelsArray.map((channel) =>
-                <div><Card key={key++} id={key} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} /></div>)}
+    <div>
+      <h1 className="rankingTitle">Classifica canali UNICT</h1>
+      {loading ? (
+        <h1 className="loadingText">Loading...</h1>
+      ) : (
+        <div className="mainContent">
+          {channelsArray.map((channel) => (
+            <div className="cards">
+              <Card
+                key={key++}
+                id={key}
+                title={channel.title}
+                link={channel.link}
+                description={channel.description}
+                picture={channel.pictureID}
+                subscribers={channel.subscribers}
+              />
             </div>
-          )
-      }
-      <div>
-        <h1>Example</h1>
-      </div>
-      <div>
-        <h1>Example</h1>
-      </div>
-      <div>
-        <h1>Example</h1>
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 function Card(props: any): JSX.Element {
   return (
-    <ul>
+    <ul className="actualCardsContents">
       <div className="imageAndRanking">
         <a href={props.link}>
-          <img className="images" src={props.picture} alt={props.title + " picture"} />
+          <img
+            className="images"
+            src={props.picture}
+            alt={props.title + " picture"}
+          />
         </a>
-        <h2 className="ranking">{props.id}°</h2>
+        <h2 className="rankings">{props.id}°</h2>
       </div>
       <br />
-      <a className="channelsLinks" href={props.link}><h1>{props.title}</h1></a>
-      <p className="description">{props.description}</p>
+      <a className="channelsLinks" href={props.link}>
+        <h1>{props.title}</h1>
+      </a>
+      <p className="descriptions">{props.description}</p>
       <p className="subscribers">Subscribers: {props.subscribers}</p>
     </ul>
   );
 }
 
 function App(): JSX.Element {
-  return <Channels />
+  return <Channels />;
 }
 
 export default App;

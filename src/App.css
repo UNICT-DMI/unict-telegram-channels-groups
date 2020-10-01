@@ -1,70 +1,87 @@
 body {
-    background-color: #212529;
+  background-color: #212529;
+}
+
+.loadingText,
+.rankingTitle {
+  text-align: center;
+  color: white;
 }
 
 .mainContent {
-    display: grid;
-    grid-template-columns: 33% 33% 34%;
+  display: grid;
+  grid-template-columns: 33% 33% 34%;
 }
 
-.loadingText, .rankingTitle {
-    text-align: center;
-    color: white;
+.cards {
+  display: block;
+  height: auto;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 2rem;
+  box-shadow: -1rem 1rem 1rem #001020;
+  background-color: #343a40;
+  transition: 0.3s;
 }
 
-ul {
-    display: inline-block;
-    vertical-align: top;
-    justify-content: space-between;
-    width: 24.5%;
-    height: auto;
-    padding: 3rem;
-    margin: 2rem;
-    border-radius: 2rem;
-    box-shadow: -1rem 1rem 1rem #001020;
-    background-color: #343a40;
-    transition: .3s;
+.cards:hover {
+  background-color: #343a50;
+  transform: translateY(-1rem);
 }
 
-ul:nth-child(2):hover {
-    background-color: #808000;
+.cards:nth-child(1):hover {
+  background-color: #808000;
 }
 
-ul:nth-child(3):hover {
-    background-color: #808080;
+.cards:nth-child(2):hover {
+  background-color: #808080;
 }
 
-ul:nth-child(4):hover {
-    background-color: #663300;
+.cards:nth-child(3):hover {
+  background-color: #663300;
 }
 
-ul:hover {
-    background-color: #343a50;
-    transform: translateY(-1rem);
+.actualCardsContents {
+  margin: 0;
+  padding: 0;
 }
 
 .imageAndRanking {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 .images {
-    width: 50%;
+  width: 50%;
 }
 
-.ranking {
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 3rem;
-    color: lightgreen;
+.rankings {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 3rem;
+  color: lightgreen;
 }
 
 .channelsLinks {
-    color: lightblue;
+  color: lightblue;
 }
 
-.description {
-    color: white;
+.descriptions {
+  color: white;
 }
 
 .subscribers {
-    color: lightgreen;
+  color: lightgreen;
+}
+
+@media screen and (max-width: 1024px) {
+  .mainContent {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .mainContent {
+    display: grid;
+    grid-template-columns: 100%;
+  }
 }
