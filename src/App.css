@@ -1,35 +1,40 @@
-html {
+body {
     background-color: #212529;
 }
 
-.loadingText {
+.mainContent {
+    display: grid;
+    grid-template-columns: 33% 33% 34%;
+}
+
+.loadingText, .rankingTitle {
     text-align: center;
     color: white;
 }
 
 ul {
     display: inline-block;
-    justify-content: space-between;
     vertical-align: top;
-    width: 25%;
+    justify-content: space-between;
+    width: 24.5%;
     height: auto;
-    padding: 25px;
-    margin: 25px;
-    border-radius: 15px;
-    box-shadow: 0 0 1rem #669999;
+    padding: 3rem;
+    margin: 2rem;
+    border-radius: 2rem;
+    box-shadow: -1rem 1rem 1rem #001020;
     background-color: #343a40;
     transition: .3s;
 }
 
-ul:nth-child(1):hover {
+ul:nth-child(2):hover {
     background-color: #808000;
 }
 
-ul:nth-child(2):hover {
+ul:nth-child(3):hover {
     background-color: #808080;
 }
 
-ul:nth-child(3):hover {
+ul:nth-child(4):hover {
     background-color: #663300;
 }
 
@@ -38,8 +43,21 @@ ul:hover {
     transform: translateY(-1rem);
 }
 
+.imageAndRanking {
+    display: flex;
+    justify-content: space-between;
+}
+.images {
+    width: 50%;
+}
+
+.ranking {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    color: lightgreen;
+}
+
 .channelsLinks {
-    display: inline-block;
     color: lightblue;
 }
 
@@ -48,17 +66,5 @@ ul:hover {
 }
 
 .subscribers {
-    color: lightgreen;
-}
-
-.imageAndPosition {
-    display: flex;
-    justify-content: space-between;
-}
-
-.position {
-    font-family: Verdana, serif, sans-serif;
-    font-size: 40px;
-    padding: 10px;
     color: lightgreen;
 }

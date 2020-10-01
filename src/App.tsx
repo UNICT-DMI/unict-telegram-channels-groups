@@ -66,13 +66,26 @@ function Channels(): JSX.Element {
 
   let key: number = 0;
   return (
-    <div>
+    <div className="mainContent">
       {
         loading ?
-          <h1 className="loadingText">Loading...</h1> :
-          channelsArray.map((channel) =>
-            <Card key={key++} id={key} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} />)
+          <h1 className="loadingText">Loading...</h1> : (
+            <div>
+              <h1 className="rankingTitle">Classifica canali UNICT</h1>
+              {channelsArray.map((channel) =>
+                <div><Card key={key++} id={key} title={channel.title} link={channel.link} description={channel.description} picture={channel.pictureID} subscribers={channel.subscribers} /></div>)}
+            </div>
+          )
       }
+      <div>
+        <h1>Example</h1>
+      </div>
+      <div>
+        <h1>Example</h1>
+      </div>
+      <div>
+        <h1>Example</h1>
+      </div>
     </div>
   );
 }
@@ -80,18 +93,16 @@ function Channels(): JSX.Element {
 function Card(props: any): JSX.Element {
   return (
     <ul>
-      <div>
-        <div className="imageAndPosition">
-          <a href={props.link}>
-            <img src={props.picture} alt={props.title + " picture"} width="200" height="200" />
-          </a>
-          <p className="position">{props.id}°</p>
-        </div>
-        <br />
-        <a className="channelsLinks" href={props.link}><h1>{props.title}</h1></a>
-        <h3 className="description">{props.description}</h3>
-        <p className="subscribers">Subscribers: {props.subscribers}</p>
+      <div className="imageAndRanking">
+        <a href={props.link}>
+          <img className="images" src={props.picture} alt={props.title + " picture"} />
+        </a>
+        <h2 className="ranking">{props.id}°</h2>
       </div>
+      <br />
+      <a className="channelsLinks" href={props.link}><h1>{props.title}</h1></a>
+      <p className="description">{props.description}</p>
+      <p className="subscribers">Subscribers: {props.subscribers}</p>
     </ul>
   );
 }
