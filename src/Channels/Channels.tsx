@@ -135,7 +135,6 @@ function Card(props: any): JSX.Element {
         </a>
         <h2 className="rankings">{props.isSearch ? "" : props.id + "°"}</h2>
       </div>
-      <br />
       <a className="channelsLinks" href={props.link}>
         <h1>{props.title}</h1>
       </a>
