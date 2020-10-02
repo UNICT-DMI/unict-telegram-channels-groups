@@ -93,7 +93,7 @@ function Channels(): JSX.Element {
       ) : (
         <div className="mainContent">
           {channelsArray.map(channel =>
-            channel.title.toLowerCase().includes(searchInput) ? (
+            channel.title.toLowerCase().includes(searchInput.toLowerCase()) ? (
               <div className="cards">
                 <Card
                   key={key++}
