@@ -7,6 +7,7 @@ import "./App.css";
 function Channels(): JSX.Element {
   const [channelsArray, setChannelsArray] = useState<ChannelEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [searchInput, setSearchInput] = useState<string>("");
   const promises: Promise<any>[] = [];
   const promisesPictures: Promise<any>[] = [];
   const promisesMembers: Promise<any>[] = [];
@@ -27,8 +28,8 @@ function Channels(): JSX.Element {
         fetch(
           `https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`
         )
-          .then((res) => res.json())
-          .then((data) => {
+          .then(res => res.json())
+          .then(data => {
             newChannel.title = data.result.title;
             newChannel.link = `https://t.me/${channelName}`;
             newChannel.description = data.result.description
@@ -38,9 +39,9 @@ function Channels(): JSX.Element {
               fetch(
                 `https://api.telegram.org/bot${API_KEY}/getFile?file_id=${data.result.photo.big_file_id}`
               )
-                .then((res) => res.json())
+                .then(res => res.json())
                 .then(
-                  (data) =>
+                  data =>
                     (newChannel.pictureID = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
                 )
             );
@@ -51,8 +52,8 @@ function Channels(): JSX.Element {
         fetch(
           `https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`
         )
-          .then((res) => res.json())
-          .then((data) => (newChannel.subscribers = data.result))
+          .then(res => res.json())
+          .then(data => (newChannel.subscribers = data.result))
           .then(() => sortedArray.push(newChannel))
       );
     }
@@ -82,23 +83,33 @@ function Channels(): JSX.Element {
   return (
     <div>
       <h1 className="rankingTitle">Classifica canali UNICT</h1>
+      <input
+        className="searchInput"
+        placeholder="Search..."
+        onChange={input => setSearchInput(input.target.value)}
+      ></input>
       {loading ? (
         <h1 className="loadingText">Loading...</h1>
       ) : (
         <div className="mainContent">
-          {channelsArray.map((channel) => (
-            <div className="cards">
-              <Card
-                key={key++}
-                id={key}
-                title={channel.title}
-                link={channel.link}
-                description={channel.description}
-                picture={channel.pictureID}
-                subscribers={channel.subscribers}
-              />
-            </div>
-          ))}
+          {channelsArray.map(channel =>
+            channel.title.toLowerCase().includes(searchInput) ? (
+              <div className="cards">
+                <Card
+                  key={key++}
+                  id={key}
+                  isSearch={searchInput != ""}
+                  title={channel.title}
+                  link={channel.link}
+                  description={channel.description}
+                  picture={channel.pictureID}
+                  subscribers={channel.subscribers}
+                />
+              </div>
+            ) : (
+              ""
+            )
+          )}
         </div>
       )}
     </div>
@@ -116,7 +127,7 @@ function Card(props: any): JSX.Element {
             alt={props.title + " picture"}
           />
         </a>
-        <h2 className="rankings">{props.id}°</h2>
+        <h2 className="rankings">{props.isSearch ? "" : props.id + "°"}</h2>
       </div>
       <br />
       <a className="channelsLinks" href={props.link}>

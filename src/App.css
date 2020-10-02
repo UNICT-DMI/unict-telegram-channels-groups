@@ -8,6 +8,14 @@ body {
   color: white;
 }
 
+.searchInput {
+  display: block;
+  margin: auto;
+  padding: 0.5rem;
+  border: 0.1rem solid lightgreen;
+  background-color: #343a40;
+}
+
 .mainContent {
   display: grid;
   grid-template-columns: 33% 33% 34%;
