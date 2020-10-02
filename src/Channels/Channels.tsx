@@ -113,7 +113,7 @@ export function Channels(): JSX.Element {
                 />
               </div>
             ) : (
-              ""
+              null
             )
           )}
         </div>
