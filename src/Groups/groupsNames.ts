@@ -1,1 +1,1 @@
-export const channelsNames: string[] = [];
+export const groupsNames: string[] = [];

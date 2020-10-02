@@ -16,13 +16,13 @@ export function Channels(): JSX.Element {
   const [searchInput, setSearchInput] = useState<string>("");
   const promises: Promise<any>[] = [];
   const promisesPictures: Promise<any>[] = [];
-  const promisesMembers: Promise<any>[] = [];
+  const promisesSubscribers: Promise<any>[] = [];
 
   useEffect(() => {
     const sortedArray: ChannelEntry[] = [];
 
     function getData(channelName: string): void {
-      const newChannel: ChannelEntry = {
+      const newChannelEntry: ChannelEntry = {
         title: "",
         link: "",
         description: "",
@@ -36,9 +36,9 @@ export function Channels(): JSX.Element {
         )
           .then(res => res.json())
           .then(data => {
-            newChannel.title = data.result.title;
-            newChannel.link = `https://t.me/${channelName}`;
-            newChannel.description = data.result.description
+            newChannelEntry.title = data.result.title;
+            newChannelEntry.link = `https://t.me/${channelName}`;
+            newChannelEntry.description = data.result.description
               ? data.result.description
               : "";
             promisesPictures.push(
@@ -48,19 +48,19 @@ export function Channels(): JSX.Element {
                 .then(res => res.json())
                 .then(
                   data =>
-                    (newChannel.pictureID = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
+                    (newChannelEntry.pictureID = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
                 )
             );
           })
       );
 
-      promisesMembers.push(
+      promisesSubscribers.push(
         fetch(
           `https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`
         )
           .then(res => res.json())
-          .then(data => (newChannel.subscribers = data.result))
-          .then(() => sortedArray.push(newChannel))
+          .then(data => (newChannelEntry.subscribers = data.result))
+          .then(() => sortedArray.push(newChannelEntry))
       );
     }
 
@@ -76,7 +76,7 @@ export function Channels(): JSX.Element {
 
     Promise.all(promises).then(() =>
       Promise.all(promisesPictures).then(() =>
-        Promise.all(promisesMembers).then(() => {
+        Promise.all(promisesSubscribers).then(() => {
           sortedArray.sort(compare);
           setChannelsArray(sortedArray);
           setLoading(false);
@@ -89,6 +89,10 @@ export function Channels(): JSX.Element {
   return (
     <div>
       <h1 className="rankingTitle">Classifica canali UNICT</h1>
+      <label className="switch">
+        <input type="checkbox" />
+        <span className="slider" />
+      </label>
       <input
         className="searchInput"
         placeholder="Search..."
@@ -112,9 +116,7 @@ export function Channels(): JSX.Element {
                   subscribers={channel.subscribers}
                 />
               </div>
-            ) : (
-              null
-            )
+            ) : null
           )}
         </div>
       )}
