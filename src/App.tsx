@@ -9,10 +9,10 @@ function App(): JSX.Element {
     <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
+          <Route exact path="/UNICT-Telegram-Channels-Groups">
             <Channels />
           </Route>
-          <Route exact path="/groups">
+          <Route exact path="/UNICT-Telegram-Channels-Groups/groups">
             <Groups />
           </Route>
         </Switch>
