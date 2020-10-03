@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { channelsNames } from "./channelsNames";
 import { API_KEY } from "../BotAPI";
+import { Link } from "react-router-dom";
 
 interface ChannelEntry {
   title: string;
@@ -88,6 +89,12 @@ export function Channels(): JSX.Element {
   let key: number = 0;
   return (
     <div>
+      <div className="routing">
+        <h1 className="rankingTitle">Classifica canali UNICT</h1>
+        <Link to="/groups" className="groupsLink">
+          Visualizza Gruppi
+        </Link>
+      </div>
       <input
         className="searchInput"
         placeholder="Search..."

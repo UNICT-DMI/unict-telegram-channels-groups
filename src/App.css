@@ -3,8 +3,23 @@ body {
 }
 
 .routing {
-  display: inline-block;
-  background-color: #343a40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.groupsLink {
+  position: absolute;
+  right: 3rem;
+  font-size: 1.5rem;
+  color: lightblue;
+}
+
+.channelsLink {
+  position: absolute;
+  right: 3rem;
+  font-size: 1.5rem;
+  color: lightblue;
 }
 
 .loadingText,
@@ -86,14 +101,14 @@ body {
   color: lightgreen;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1267px) {
   .mainContent {
     display: grid;
     grid-template-columns: 50% 50%;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 634px) {
   .mainContent {
     display: grid;
     grid-template-columns: 100%;

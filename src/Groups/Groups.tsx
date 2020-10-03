@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { groupsNames } from "./groupsNames";
 import { API_KEY } from "../BotAPI";
+import { Link } from "react-router-dom";
 
 interface GroupEntry {
   title: string;
@@ -61,6 +62,12 @@ export function Groups(): JSX.Element {
   let key: number = 0;
   return (
     <div>
+      <div className="routing">
+        <h1 className="rankingTitle">Classifica gruppi UNICT</h1>
+        <Link to="/" className="channelsLink">
+          Visualizza Canali
+        </Link>
+      </div>
       <input
         className="searchInput"
         placeholder="Search..."
