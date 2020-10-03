@@ -91,7 +91,7 @@ export function Channels(): JSX.Element {
     <div>
       <div className="routing">
         <h1 className="rankingTitle">Classifica canali UNICT</h1>
-        <Link to="/groups" className="groupsLink">
+        <Link to="/UNICT-Telegram-Channels-Groups/groups" className="groupsLink">
           Visualizza Gruppi DMI UNICT
         </Link>
       </div>
