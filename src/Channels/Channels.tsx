@@ -84,7 +84,7 @@ export function Channels(): JSX.Element {
         })
       )
     );
-  }, []);
+  });
 
   let key: number = 0;
   return (
@@ -110,7 +110,7 @@ export function Channels(): JSX.Element {
                 <Card
                   key={key++}
                   id={key}
-                  isSearch={searchInput != ""}
+                  isSearch={searchInput !== ""}
                   title={channel.title}
                   link={channel.link}
                   description={channel.description}

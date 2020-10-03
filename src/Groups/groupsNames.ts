@@ -1,1 +1,3 @@
-export const groupsNames: string[] = [];
+export const groupsNames: string[] = [
+    "",
+];

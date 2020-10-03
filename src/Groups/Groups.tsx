@@ -30,12 +30,6 @@ export function Groups(): JSX.Element {
         pictureID: "",
         members: 0,
       };
-
-      promises.push(
-        fetch(`https://api.telegram.org/bot${API_KEY}/getUpdates`).then(res =>
-          console.log(res)
-        )
-      );
     }
 
     for (const group of groupsNames) {
@@ -57,7 +51,7 @@ export function Groups(): JSX.Element {
         })
       )
     );
-  }, []);
+  });
 
   let key: number = 0;
   return (
@@ -83,7 +77,7 @@ export function Groups(): JSX.Element {
                 <Card
                   key={key++}
                   id={key}
-                  isSearch={searchInput != ""}
+                  isSearch={searchInput !== ""}
                   title={channel.title}
                   link={channel.link}
                   description={channel.description}
