@@ -88,11 +88,6 @@ export function Channels(): JSX.Element {
   let key: number = 0;
   return (
     <div>
-      <h1 className="rankingTitle">Classifica canali UNICT</h1>
-      <label className="switch">
-        <input type="checkbox" />
-        <span className="slider" />
-      </label>
       <input
         className="searchInput"
         placeholder="Search..."

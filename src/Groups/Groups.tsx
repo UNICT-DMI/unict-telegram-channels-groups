@@ -31,9 +31,9 @@ export function Groups(): JSX.Element {
       };
 
       promises.push(
-        fetch(
-          `https://api.telegram.org/bot${API_KEY}/getUpdates`
-        ).then(res => console.log(res))
+        fetch(`https://api.telegram.org/bot${API_KEY}/getUpdates`).then(res =>
+          console.log(res)
+        )
       );
     }
 
@@ -61,11 +61,6 @@ export function Groups(): JSX.Element {
   let key: number = 0;
   return (
     <div>
-      <h1 className="rankingTitle">Classifica canali UNICT</h1>
-      <label className="switch">
-        <input type="checkbox" />
-        <span className="slider" />
-      </label>
       <input
         className="searchInput"
         placeholder="Search..."

@@ -2,49 +2,15 @@ body {
   background-color: #212529;
 }
 
+.routing {
+  display: inline-block;
+  background-color: #343a40;
+}
+
 .loadingText,
 .rankingTitle {
   text-align: center;
   color: white;
-}
-
-.switch {
-  position: absolute;
-  right: 2rem;
-  width: 4rem;
-  height: 1.9rem;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 1rem;
-  background-color: #343a40;
-  transition: .3s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 1.5rem;
-  width: 1.5rem;
-  left: 0.5rem;
-  bottom: 0.2rem;
-  border-radius: 1rem;
-  background-color: lightblue;
-  transition: .3s;
-}
-
-input:checked + .slider {
-  background-color: lightgreen;
-}
-
-input:checked + .slider:before {
-  transform: translateX(1.5rem);
 }
 
 .searchInput {
