@@ -2,6 +2,26 @@ body {
   background-color: #212529;
 }
 
+.routing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.groupsLink {
+  position: absolute;
+  right: 3rem;
+  font-size: 1.5rem;
+  color: lightblue;
+}
+
+.channelsLink {
+  position: absolute;
+  right: 3rem;
+  font-size: 1.5rem;
+  color: lightblue;
+}
+
 .loadingText,
 .rankingTitle {
   text-align: center;
@@ -13,6 +33,7 @@ body {
   margin: auto;
   padding: 0.5rem;
   border: 0.1rem solid lightgreen;
+  color: white;
   background-color: #343a40;
 }
 
@@ -80,16 +101,27 @@ body {
   color: lightgreen;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1267px) {
   .mainContent {
     display: grid;
     grid-template-columns: 50% 50%;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 634px) {
   .mainContent {
     display: grid;
     grid-template-columns: 100%;
   }
+}
+
+.credits {
+  text-align: end;
+  color: white;
+  padding: 1rem;
+}
+
+.credits a {
+  text-decoration: none;
+  color: yellow;
 }
