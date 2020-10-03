@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom"
 import { Channels } from "./Channels/Channels";
 import { Groups } from "./Groups/Groups";
 import "./App.css";

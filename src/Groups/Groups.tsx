@@ -30,7 +30,11 @@ export function Groups(): JSX.Element {
         members: 0,
       };
 
-      //promises.push(fetch(channelName).then(res => console.log(res)));
+      promises.push(
+        fetch(
+          `https://api.telegram.org/bot${API_KEY}/getUpdates`
+        ).then(res => console.log(res))
+      );
     }
 
     for (const group of groupsNames) {
