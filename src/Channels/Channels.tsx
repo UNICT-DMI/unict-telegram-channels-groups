@@ -84,7 +84,7 @@ export function Channels(): JSX.Element {
         })
       )
     );
-  });
+  }, []);
 
   let key: number = 0;
   return (
@@ -106,10 +106,9 @@ export function Channels(): JSX.Element {
         <div className="mainContent">
           {channelsArray.map(channel =>
             channel.title.toLowerCase().includes(searchInput.toLowerCase()) ? (
-              <div className="cards">
+              <div className="cards" key={key++}>
                 <Card
-                  key={key++}
-                  id={key}
+                  ranking={key}
                   isSearch={searchInput !== ""}
                   title={channel.title}
                   link={channel.link}
@@ -137,7 +136,7 @@ function Card(props: any): JSX.Element {
             alt={props.title + " picture"}
           />
         </a>
-        <h2 className="rankings">{props.isSearch ? "" : props.id + "°"}</h2>
+        <h2 className="rankings">{props.isSearch ? "" : props.ranking + "°"}</h2>
       </div>
       <a className="channelsLinks" href={props.link}>
         <h1>{props.title}</h1>

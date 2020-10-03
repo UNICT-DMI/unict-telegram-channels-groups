@@ -114,3 +114,14 @@ body {
     grid-template-columns: 100%;
   }
 }
+
+.credits {
+  text-align: end;
+  color: white;
+  padding: 1rem;
+}
+
+.credits a {
+  text-decoration: none;
+  color: yellow;
+}

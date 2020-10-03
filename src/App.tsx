@@ -6,16 +6,22 @@ import "./App.css";
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/">
-          <Channels />
-        </Route>
-        <Route exact path="/groups">
-          <Groups />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Channels />
+          </Route>
+          <Route exact path="/groups">
+            <Groups />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      <p className="credits">
+        Coded by{" "}
+        <a href="https://github.com/Lorenzo-Pappalardo">Lorenzo Pappalardo</a>
+      </p>
+    </div>
   );
 }
 

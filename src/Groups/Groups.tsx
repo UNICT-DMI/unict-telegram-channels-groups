@@ -51,7 +51,7 @@ export function Groups(): JSX.Element {
         })
       )
     );
-  });
+  }, []);
 
   let key: number = 0;
   return (
@@ -71,18 +71,17 @@ export function Groups(): JSX.Element {
         <h1 className="loadingText">Loading...</h1>
       ) : (
         <div className="mainContent">
-          {groupsArray.map(channel =>
-            channel.title.toLowerCase().includes(searchInput.toLowerCase()) ? (
-              <div className="cards">
+          {groupsArray.map(group =>
+            group.title.toLowerCase().includes(searchInput.toLowerCase()) ? (
+              <div className="cards" key={key++}>
                 <Card
-                  key={key++}
-                  id={key}
+                  ranking={key}
                   isSearch={searchInput !== ""}
-                  title={channel.title}
-                  link={channel.link}
-                  description={channel.description}
-                  picture={channel.pictureID}
-                  subscribers={channel.members}
+                  title={group.title}
+                  link={group.link}
+                  description={group.description}
+                  picture={group.pictureID}
+                  subscribers={group.members}
                 />
               </div>
             ) : null
@@ -104,7 +103,9 @@ function Card(props: any): JSX.Element {
             alt={props.title + " picture"}
           />
         </a>
-        <h2 className="rankings">{props.isSearch ? "" : props.id + "°"}</h2>
+        <h2 className="rankings">
+          {props.isSearch ? "" : props.ranking + "°"}
+        </h2>
       </div>
       <a className="channelsLinks" href={props.link}>
         <h1>{props.title}</h1>
