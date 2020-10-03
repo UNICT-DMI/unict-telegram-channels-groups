@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { groupsNames } from "./groupsNames";
-import { API_KEY } from "../BotAPI";
 import { Link } from "react-router-dom";
+import {
+  firstYearGroupsNames,
+  secondYearGroupsNames,
+  thirdYearGroupsNames,
+} from "./groupsNames";
 
 interface GroupEntry {
   title: string;
   link: string;
   description: string;
-  pictureID: string;
+  pictureURL: string;
   members: number;
 }
 
@@ -16,24 +19,55 @@ export function Groups(): JSX.Element {
   const [loading, setLoading] = useState<boolean>(true);
   const [searchInput, setSearchInput] = useState<string>("");
   const promises: Promise<any>[] = [];
-  const promisesPictures: Promise<any>[] = [];
-  const promisesMembers: Promise<any>[] = [];
 
   useEffect(() => {
     const sortedArray: GroupEntry[] = [];
 
-    function getData(channelName: string): void {
+    function getData(groupName: string, year: string): void {
       const newGroupEntry: GroupEntry = {
         title: "",
         link: "",
         description: "",
-        pictureID: "",
+        pictureURL: "",
         members: 0,
       };
+
+      promises.push(
+        fetch(
+          `http://188.213.170.165/list-telegram-groups/${year}/${groupName}.json`
+        )
+          .then(res => res.json())
+          .then(data => {
+            newGroupEntry.title = groupName;
+            let tmpLink: string = data.link;
+            newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
+            newGroupEntry.description = data.description;
+            if (data.image_link === "") {
+              newGroupEntry.pictureURL =
+                "https://upload.wikimedia.org/wikipedia/commons/8/83/Telegram_2019_Logo.svg";
+            } else {
+              let tmpPic = data.image_link;
+              newGroupEntry.pictureURL = tmpPic.substring(1);
+            }
+            let tmpMembers: string[] = (data.members_number as string).split(
+              " "
+            );
+            newGroupEntry.members = parseInt(tmpMembers[0]);
+          })
+          .then(() => sortedArray.push(newGroupEntry))
+      );
     }
 
-    for (const group of groupsNames) {
-      getData(group);
+    for (const group of firstYearGroupsNames) {
+      getData(group, "PRIMO_ANNO");
+    }
+
+    for (const group of secondYearGroupsNames) {
+      getData(group, "SECONDO_ANNO");
+    }
+
+    for (const group of thirdYearGroupsNames) {
+      getData(group, "TERZO_ANNO");
     }
 
     function compare(a: GroupEntry, b: GroupEntry): number {
@@ -42,24 +76,20 @@ export function Groups(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises).then(() =>
-      Promise.all(promisesPictures).then(() =>
-        Promise.all(promisesMembers).then(() => {
-          sortedArray.sort(compare);
-          setGroupsArray(sortedArray);
-          setLoading(false);
-        })
-      )
-    );
+    Promise.all(promises).then(() => {
+      sortedArray.sort(compare);
+      setGroupsArray(sortedArray);
+      setLoading(false);
+    });
   }, []);
 
   let key: number = 0;
   return (
     <div>
       <div className="routing">
-        <h1 className="rankingTitle">Classifica gruppi UNICT</h1>
+        <h1 className="rankingTitle">Classifica gruppi DMI UNICT</h1>
         <Link to="/" className="channelsLink">
-          Visualizza Canali
+          Visualizza Canali UNICT
         </Link>
       </div>
       <input
@@ -80,7 +110,7 @@ export function Groups(): JSX.Element {
                   title={group.title}
                   link={group.link}
                   description={group.description}
-                  picture={group.pictureID}
+                  picture={group.pictureURL}
                   subscribers={group.members}
                 />
               </div>

@@ -7,7 +7,7 @@ interface ChannelEntry {
   title: string;
   link: string;
   description: string;
-  pictureID: string;
+  pictureURL: string;
   subscribers: number;
 }
 
@@ -27,7 +27,7 @@ export function Channels(): JSX.Element {
         title: "",
         link: "",
         description: "",
-        pictureID: "",
+        pictureURL: "",
         subscribers: 0,
       };
 
@@ -49,7 +49,7 @@ export function Channels(): JSX.Element {
                 .then(res => res.json())
                 .then(
                   data =>
-                    (newChannelEntry.pictureID = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
+                    (newChannelEntry.pictureURL = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
                 )
             );
           })
@@ -92,7 +92,7 @@ export function Channels(): JSX.Element {
       <div className="routing">
         <h1 className="rankingTitle">Classifica canali UNICT</h1>
         <Link to="/groups" className="groupsLink">
-          Visualizza Gruppi
+          Visualizza Gruppi DMI UNICT
         </Link>
       </div>
       <input
@@ -113,7 +113,7 @@ export function Channels(): JSX.Element {
                   title={channel.title}
                   link={channel.link}
                   description={channel.description}
-                  picture={channel.pictureID}
+                  picture={channel.pictureURL}
                   subscribers={channel.subscribers}
                 />
               </div>
