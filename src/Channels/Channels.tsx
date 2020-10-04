@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { channelsNames } from "./channelsNames";
-import { API_KEY } from "../BotAPI";
 import { Link } from "react-router-dom";
 
 interface ChannelEntry {
@@ -10,6 +9,8 @@ interface ChannelEntry {
   pictureURL: string;
   subscribers: number;
 }
+
+const API = 'https://usefulness.altervista.org/list-telegram-groups/api.telegram.php?';
 
 export function Channels(): JSX.Element {
   const [channelsArray, setChannelsArray] = useState<ChannelEntry[]>([]);
@@ -33,7 +34,7 @@ export function Channels(): JSX.Element {
 
       promises.push(
         fetch(
-          `https://api.telegram.org/bot${API_KEY}/getChat?chat_id=@${channelName}`
+          `${API}chat=${channelName}`
         )
           .then(res => res.json())
           .then(data => {
@@ -44,20 +45,17 @@ export function Channels(): JSX.Element {
               : "";
             promisesPictures.push(
               fetch(
-                `https://api.telegram.org/bot${API_KEY}/getFile?file_id=${data.result.photo.big_file_id}`
+                `${API}file=${data.result.photo.big_file_id}`
               )
                 .then(res => res.json())
-                .then(
-                  data =>
-                    (newChannelEntry.pictureURL = `https://api.telegram.org/file/bot${API_KEY}/${data.result.file_path}`)
-                )
+                .then(d => (newChannelEntry.pictureURL = `${API}path=${d.result.file_path}`))
             );
           })
       );
 
       promisesSubscribers.push(
         fetch(
-          `https://api.telegram.org/bot${API_KEY}/getChatMembersCount?chat_id=@${channelName}`
+          `${API}count=${channelName}`
         )
           .then(res => res.json())
           .then(data => (newChannelEntry.subscribers = data.result))
@@ -105,7 +103,7 @@ export function Channels(): JSX.Element {
       ) : (
         <div className="mainContent">
           {channelsArray.map(channel =>
-            channel.title.toLowerCase().includes(searchInput.toLowerCase()) ? (
+            channel.title.toLowerCase().includes(searchInput.toLowerCase()) && (
               <div className="cards" key={key++}>
                 <Card
                   ranking={key}
@@ -117,7 +115,7 @@ export function Channels(): JSX.Element {
                   subscribers={channel.subscribers}
                 />
               </div>
-            ) : null
+            )
           )}
         </div>
       )}
