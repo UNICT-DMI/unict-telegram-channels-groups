@@ -42,9 +42,8 @@ export function Groups(): JSX.Element {
             let tmpLink: string = data.link;
             newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
             newGroupEntry.description = data.description;
-            if (data.image_link === "") {
-              newGroupEntry.pictureURL =
-                "https://upload.wikimedia.org/wikipedia/commons/8/83/Telegram_2019_Logo.svg";
+            if (data.image_link === '') {
+              newGroupEntry.pictureURL = 'telegram.svg';
             } else {
               let tmpPic = data.image_link;
               newGroupEntry.pictureURL = tmpPic.substring(1);
@@ -102,7 +101,7 @@ export function Groups(): JSX.Element {
       ) : (
         <div className="mainContent">
           {groupsArray.map(group =>
-            group.title.toLowerCase().includes(searchInput.toLowerCase()) ? (
+            group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
               <div className="cards" key={key++}>
                 <Card
                   ranking={key}
@@ -114,7 +113,7 @@ export function Groups(): JSX.Element {
                   subscribers={group.members}
                 />
               </div>
-            ) : null
+            )
           )}
         </div>
       )}
