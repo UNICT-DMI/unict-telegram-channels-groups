@@ -21,7 +21,7 @@ function App(): JSX.Element {
       <p className="credits">
         Coded by
         <a href="https://github.com/Lorenzo-Pappalardo">Lorenzo Pappalardo</a>
-        <a href="https://github.com/Helias">Helias</a>
+        <a href="https://github.com/Helias">Stefano Borzì</a>
       </p>
     </div>
   );
