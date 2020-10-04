@@ -15,12 +15,13 @@ function App(): JSX.Element {
           <Route exact path="/groups">
             <Groups />
           </Route>
-          <Redirect to='/channels' />
+          <Redirect to="/channels" />
         </Switch>
       </HashRouter>
       <p className="credits">
-        Coded by{" "}
+        Coded by
         <a href="https://github.com/Lorenzo-Pappalardo">Lorenzo Pappalardo</a>
+        <a href="https://github.com/Helias">Helias</a>
       </p>
     </div>
   );

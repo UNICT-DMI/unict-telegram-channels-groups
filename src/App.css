@@ -108,12 +108,14 @@ body {
 }
 
 .credits {
-  text-align: end;
+  display: block;
+  text-align: center;
   color: white;
   padding: 1rem;
 }
 
 .credits a {
+  display: block;
   text-decoration: none;
   color: yellow;
 }
