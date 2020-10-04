@@ -87,7 +87,7 @@ export function Groups(): JSX.Element {
     <div>
       <div className="routing">
         <h1 className="rankingTitle">Classifica gruppi DMI UNICT</h1>
-        <Link to="/channels" className="channelsLink">
+        <Link to="/channels" className="goToChannelsLink">
           Visualizza Canali UNICT
         </Link>
       </div>
@@ -136,7 +136,7 @@ function Card(props: any): JSX.Element {
           {props.isSearch ? "" : props.ranking + "°"}
         </h2>
       </div>
-      <a className="channelsLinks" href={props.link}>
+      <a className="links" href={props.link}>
         <h1>{props.title}</h1>
       </a>
       <p className="descriptions">{props.description}</p>
