@@ -8,30 +8,24 @@ body {
   justify-content: center;
 }
 
-.groupsLink {
+.goToGroupsLink {
   position: absolute;
   right: 3rem;
   font-size: 1.5rem;
   color: lightblue;
 }
 
-.channelsLink {
+.goToChannelsLink {
   position: absolute;
   right: 3rem;
   font-size: 1.5rem;
   color: lightblue;
 }
 
+.loadingText,
 .rankingTitle {
   text-align: center;
   color: white;
-}
-
-.loading {
-  width: 100px;
-  height: 100px;
-  margin: 40px auto;
-  display: block;
 }
 
 .searchInput {
@@ -95,7 +89,7 @@ body {
   color: lightgreen;
 }
 
-.channelsLinks {
+.links {
   color: lightblue;
 }
 
@@ -107,20 +101,6 @@ body {
   color: lightgreen;
 }
 
-@media screen and (max-width: 1267px) {
-  .mainContent {
-    display: grid;
-    grid-template-columns: 50% 50%;
-  }
-}
-
-@media screen and (max-width: 634px) {
-  .mainContent {
-    display: grid;
-    grid-template-columns: 100%;
-  }
-}
-
 .credits {
   text-align: end;
   color: white;
@@ -130,4 +110,37 @@ body {
 .credits a {
   text-decoration: none;
   color: yellow;
+}
+
+@media screen and (max-width: 1267px) {
+  .mainContent {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+  .routing {
+    display: block;
+    margin: auto;
+  }
+
+  .goToGroupsLink {
+    position: static;
+    display: block;
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .goToChannelsLink {
+    position: static;
+    display: block;
+    text-align: center;
+    margin: 1rem;
+  }
+}
+
+@media screen and (max-width: 634px) {
+  .mainContent {
+    display: grid;
+    grid-template-columns: 100%;
+  }
 }
