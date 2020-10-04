@@ -98,7 +98,7 @@ export function Groups(): JSX.Element {
         onChange={input => setSearchInput(input.target.value)}
       ></input>
       {loading ? (
-        <h1 className="loadingText">Loading...</h1>
+        <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
         <div className="mainContent">
           {groupsArray.map(group =>
