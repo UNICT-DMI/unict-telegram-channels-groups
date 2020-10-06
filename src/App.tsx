@@ -22,6 +22,7 @@ function App(): JSX.Element {
         Coded by
         <a href="https://github.com/Lorenzo-Pappalardo">Lorenzo Pappalardo</a>
         <a href="https://github.com/Helias">Stefano Borzì</a>
+        <a href="https://github.com/Gigi-G">Luigi Seminara</a>
       </p>
     </div>
   );
