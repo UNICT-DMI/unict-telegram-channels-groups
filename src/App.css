@@ -28,10 +28,9 @@ body {
 }
 
 .loading {
-  width: 100px;
-  height: 100px;
-  margin: 40px auto;
   display: block;
+  width: 10%;
+  margin: 1rem auto;
 }
 
 .searchInput {
@@ -85,6 +84,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 .images {
   width: 50%;
 }
@@ -152,7 +152,7 @@ body {
     grid-template-columns: 100%;
   }
 
-  .links{
+  .links {
     font-size: 3vw;
   }
 }
