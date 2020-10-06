@@ -1,8 +1,8 @@
-import React from 'react'
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
-import { Channels } from './Channels/Channels'
-import { Groups } from './Groups/Groups'
-import './App.css'
+import React from 'react';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Channels } from './Channels/Channels';
+import { Groups } from './Groups/Groups';
+import './App.css';
 
 function App(): JSX.Element {
   return (
@@ -25,7 +25,7 @@ function App(): JSX.Element {
         <a href="https://github.com/Gigi-G">Luigi Seminara</a>
       </p>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
