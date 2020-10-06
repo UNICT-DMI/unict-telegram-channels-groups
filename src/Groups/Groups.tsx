@@ -15,7 +15,7 @@ interface GroupEntry {
   code: string;
 }
 
-export function Groups (): JSX.Element {
+export function Groups(): JSX.Element {
   const [groupsArray, setGroupsArray] = useState<GroupEntry[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [searchInput, setSearchInput] = useState<string>('')
@@ -24,7 +24,7 @@ export function Groups (): JSX.Element {
     const sortedArray: GroupEntry[] = []
     const promises: Promise<any>[] = []
 
-    function getData (year: string, groupName: string, code: string): void {
+    function getData(year: string, groupName: string, code: string): void {
       const newGroupEntry: GroupEntry = {
         title: '',
         link: '',
@@ -74,7 +74,7 @@ export function Groups (): JSX.Element {
       getData('TERZO_ANNO', group.title, group.code)
     }
 
-    function compare (a: GroupEntry, b: GroupEntry): number {
+    function compare(a: GroupEntry, b: GroupEntry): number {
       if (a.members < b.members) return 1
       else if (a.members > b.members) return -1
       return 0
@@ -109,31 +109,31 @@ export function Groups (): JSX.Element {
           alt="loading"
         />
       ) : (
-        <div className="mainContent">
-          {groupsArray.map(
-            group =>
-              group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                <div className="cards" key={key++}>
-                  <Card
-                    ranking={key}
-                    isSearch={searchInput !== ''}
-                    title={group.title}
-                    link={group.link}
-                    description={group.description}
-                    picture={group.pictureURL}
-                    members={group.members}
-                    code={group.code}
-                  />
-                </div>
-              )
-          )}
-        </div>
-      )}
+          <div className="mainContent">
+            {groupsArray.map(
+              group =>
+                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                  <div className="cards" key={key++}>
+                    <Card
+                      ranking={key}
+                      isSearch={searchInput !== ''}
+                      title={group.title}
+                      link={group.link}
+                      description={group.description}
+                      picture={group.pictureURL}
+                      members={group.members}
+                      code={group.code}
+                    />
+                  </div>
+                )
+            )}
+          </div>
+        )}
     </div>
   )
 }
 
-function Card (props: any): JSX.Element {
+function Card(props: any): JSX.Element {
   return (
     <ul className="actualCardsContents">
       <div className="imageAndRanking">
