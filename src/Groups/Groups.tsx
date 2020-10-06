@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   firstYearGroupsNames,
   secondYearGroupsNames,
-  thirdYearGroupsNames,
-} from "./groupsNames";
+  thirdYearGroupsNames
+} from './groupsNames'
 
 interface GroupEntry {
   title: string;
@@ -12,77 +12,82 @@ interface GroupEntry {
   description: string;
   pictureURL: string;
   members: number;
+  code: string;
 }
 
-export function Groups(): JSX.Element {
-  const [groupsArray, setGroupsArray] = useState<GroupEntry[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [searchInput, setSearchInput] = useState<string>("");
+export function Groups (): JSX.Element {
+  const [groupsArray, setGroupsArray] = useState<GroupEntry[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [searchInput, setSearchInput] = useState<string>('')
 
   useEffect(() => {
-    const sortedArray: GroupEntry[] = [];
-    const promises: Promise<any>[] = [];
+    const sortedArray: GroupEntry[] = []
+    const promises: Promise<any>[] = []
 
-    function getData(groupName: string, year: string): void {
+    function getData (year: string, groupName: string, code: string): void {
       const newGroupEntry: GroupEntry = {
-        title: "",
-        link: "",
-        description: "",
-        pictureURL: "",
+        title: '',
+        link: '',
+        description: '',
+        pictureURL: '',
         members: 0,
-      };
+        code: ''
+      }
 
       promises.push(
         fetch(
-          `https://usefulness.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`
+          `https://usefulness.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(
+            year + '/' + groupName
+          )}.json`
         )
           .then(res => res.json())
           .then(data => {
-            newGroupEntry.title = groupName;
-            let tmpLink: string = data.link;
-            newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
-            newGroupEntry.description = data.description;
+            newGroupEntry.title = groupName
+            const tmpLink: string = data.link
+            newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1)
+            newGroupEntry.description = data.description
             if (data.image_link === '') {
-              newGroupEntry.pictureURL = 'telegram.svg';
+              newGroupEntry.pictureURL = 'telegram.svg'
             } else {
-              let tmpPic = data.image_link;
-              newGroupEntry.pictureURL = tmpPic.substring(1);
+              const tmpPic = data.image_link
+              newGroupEntry.pictureURL = tmpPic.substring(1)
             }
-            let tmpMembers: string[] = (data.members_number as string).split(
-              " "
-            );
-            newGroupEntry.members = parseInt(tmpMembers[0]);
+            const tmpMembers: string[] = (data.members_number as string).split(
+              ' '
+            )
+            newGroupEntry.members = parseInt(tmpMembers[0])
+            newGroupEntry.code = code
           })
           .then(() => sortedArray.push(newGroupEntry))
-      );
+      )
     }
 
     for (const group of firstYearGroupsNames) {
-      getData(group, "PRIMO_ANNO");
+      getData('PRIMO_ANNO', group.title, group.code)
     }
 
     for (const group of secondYearGroupsNames) {
-      getData(group, "SECONDO_ANNO");
+      getData('SECONDO_ANNO', group.title, group.code)
     }
 
     for (const group of thirdYearGroupsNames) {
-      getData(group, "TERZO_ANNO");
+      getData('TERZO_ANNO', group.title, group.code)
     }
 
-    function compare(a: GroupEntry, b: GroupEntry): number {
-      if (a.members < b.members) return 1;
-      else if (a.members > b.members) return -1;
-      return 0;
+    function compare (a: GroupEntry, b: GroupEntry): number {
+      if (a.members < b.members) return 1
+      else if (a.members > b.members) return -1
+      return 0
     }
 
     Promise.all(promises).then(() => {
-      sortedArray.sort(compare);
-      setGroupsArray(sortedArray);
-      setLoading(false);
-    });
-  }, []);
+      sortedArray.sort(compare)
+      setGroupsArray(sortedArray)
+      setLoading(false)
+    })
+  }, [])
 
-  let key: number = 0;
+  let key: number = 0
   return (
     <div>
       <div className="routing">
@@ -97,31 +102,38 @@ export function Groups(): JSX.Element {
         onChange={input => setSearchInput(input.target.value)}
       ></input>
       {loading ? (
-        <img src="loading.gif" className="loading" key="loading" alt="loading" />
+        <img
+          src="loading.gif"
+          className="loading"
+          key="loading"
+          alt="loading"
+        />
       ) : (
         <div className="mainContent">
-          {groupsArray.map(group =>
-            group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-              <div className="cards" key={key++}>
-                <Card
-                  ranking={key}
-                  isSearch={searchInput !== ""}
-                  title={group.title}
-                  link={group.link}
-                  description={group.description}
-                  picture={group.pictureURL}
-                  subscribers={group.members}
-                />
-              </div>
-            )
+          {groupsArray.map(
+            group =>
+              group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                <div className="cards" key={key++}>
+                  <Card
+                    ranking={key}
+                    isSearch={searchInput !== ''}
+                    title={group.title}
+                    link={group.link}
+                    description={group.description}
+                    picture={group.pictureURL}
+                    members={group.members}
+                    code={group.code}
+                  />
+                </div>
+              )
           )}
         </div>
       )}
     </div>
-  );
+  )
 }
 
-function Card(props: any): JSX.Element {
+function Card (props: any): JSX.Element {
   return (
     <ul className="actualCardsContents">
       <div className="imageAndRanking">
@@ -129,18 +141,19 @@ function Card(props: any): JSX.Element {
           <img
             className="images"
             src={props.picture}
-            alt={props.title + " picture"}
+            alt={props.title + ' picture'}
           />
         </a>
         <h2 className="rankings">
-          {props.isSearch ? "" : props.ranking + "°"}
+          {props.isSearch ? '' : props.ranking + '°'}
         </h2>
       </div>
       <a className="links" href={props.link}>
         <h1>{props.title}</h1>
       </a>
       <p className="descriptions">{props.description}</p>
-      <p className="subscribers">Subscribers: {props.subscribers}</p>
+      <p className="members">Members: {props.members}</p>
+      <p className="code">Codice Teams: {props.code}</p>
     </ul>
-  );
+  )
 }

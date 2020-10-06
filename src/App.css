@@ -103,8 +103,13 @@ body {
   color: white;
 }
 
-.subscribers {
+.subscribers,
+.members {
   color: lightgreen;
+}
+
+.code {
+  color: #c77dff;
 }
 
 .credits {
