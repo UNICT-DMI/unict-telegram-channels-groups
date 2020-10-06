@@ -84,6 +84,7 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 .images {
   width: 50%;
 }
