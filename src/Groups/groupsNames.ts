@@ -14,7 +14,7 @@ export const firstYearGroupsNames: SubjectDistinct[] = [
   { title: 'PROGRAMMAZIONE I E LABORATORIO', code: '2v8sv7c', mzcode: 'qtrs803' },
   { title: 'PROGRAMMAZIONE II', code: 'lmygl88', mzcode: '2a1gpff' },
   { title: 'ULTERIORI CONOSCENZE LINGUISTICHE', code: 'tf42bu0', mzcode: '' }
-]
+];
 
 export const secondYearGroupsNames: SubjectDistinct[] = [
   { title: 'ALGORITMI E LABORATORIO', code: 'jm6xvd6', mzcode: '5llo7w4' },
@@ -24,7 +24,7 @@ export const secondYearGroupsNames: SubjectDistinct[] = [
   { title: 'RETI DI CALCOLATORI', code: '7emlunl', mzcode: '' },
   { title: 'SISTEMI OPERATIVI', code: 'i412gv5', mzcode: 'qlxao81' },
   { title: '[Discussione] I&M 2019_2020', code: '', mzcode: '' }
-]
+];
 
 export const thirdYearGroupsNames: Subject[] = [
   { title: 'CALCOLO NUMERICO', code: '' },
@@ -49,4 +49,4 @@ export const thirdYearGroupsNames: Subject[] = [
     code: 'bfei9jj'
   },
   { title: 'Web Development 2020', code: 'j0bqg8n' }
-]
+];
