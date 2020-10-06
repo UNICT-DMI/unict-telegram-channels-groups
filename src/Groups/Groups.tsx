@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   firstYearGroupsNames,
   secondYearGroupsNames,
   thirdYearGroupsNames
-} from './groupsNames'
+} from './groupsNames';
 
 interface GroupEntry {
   title: string;
@@ -13,26 +13,28 @@ interface GroupEntry {
   pictureURL: string;
   members: number;
   code: string;
+  mzcode: string;
 }
 
 export function Groups(): JSX.Element {
-  const [groupsArray, setGroupsArray] = useState<GroupEntry[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [searchInput, setSearchInput] = useState<string>('')
+  const [groupsArray, setGroupsArray] = useState<GroupEntry[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [searchInput, setSearchInput] = useState<string>('');
 
   useEffect(() => {
-    const sortedArray: GroupEntry[] = []
-    const promises: Promise<any>[] = []
+    const sortedArray: GroupEntry[] = [];
+    const promises: Promise<any>[] = [];
 
-    function getData(year: string, groupName: string, code: string): void {
+    function getData(year: string, groupName: string, code: string, mzcode: string): void {
       const newGroupEntry: GroupEntry = {
         title: '',
         link: '',
         description: '',
         pictureURL: '',
         members: 0,
-        code: ''
-      }
+        code: '',
+        mzcode: ''
+      };
 
       promises.push(
         fetch(
@@ -42,52 +44,51 @@ export function Groups(): JSX.Element {
         )
           .then(res => res.json())
           .then(data => {
-            newGroupEntry.title = groupName
-            const tmpLink: string = data.link
-            newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1)
-            newGroupEntry.description = data.description
+            newGroupEntry.title = groupName;
+            const tmpLink: string = data.link;
+            newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
+            newGroupEntry.description = data.description;
             if (data.image_link === '') {
-              newGroupEntry.pictureURL = 'telegram.svg'
+              newGroupEntry.pictureURL = 'telegram.svg';
             } else {
-              const tmpPic = data.image_link
-              newGroupEntry.pictureURL = tmpPic.substring(1)
+              const tmpPic = data.image_link;
+              newGroupEntry.pictureURL = tmpPic.substring(1);
             }
-            const tmpMembers: string[] = (data.members_number as string).split(
-              ' '
-            )
-            newGroupEntry.members = parseInt(tmpMembers[0])
-            newGroupEntry.code = code
+            const tmpMembers: string[] = (data.members_number as string).split(' ');
+            newGroupEntry.members = parseInt(tmpMembers[0]);
+            newGroupEntry.code = code;
+            newGroupEntry.mzcode = mzcode;
           })
           .then(() => sortedArray.push(newGroupEntry))
-      )
+      );
     }
 
     for (const group of firstYearGroupsNames) {
-      getData('PRIMO_ANNO', group.title, group.code)
+      getData('PRIMO_ANNO', group.title, group.code, group.mzcode);
     }
 
     for (const group of secondYearGroupsNames) {
-      getData('SECONDO_ANNO', group.title, group.code)
+      getData('SECONDO_ANNO', group.title, group.code, group.mzcode);
     }
 
     for (const group of thirdYearGroupsNames) {
-      getData('TERZO_ANNO', group.title, group.code)
+      getData('TERZO_ANNO', group.title, group.code, '');
     }
 
     function compare(a: GroupEntry, b: GroupEntry): number {
-      if (a.members < b.members) return 1
-      else if (a.members > b.members) return -1
-      return 0
+      if (a.members < b.members) return 1;
+      else if (a.members > b.members) return -1;
+      return 0;
     }
 
     Promise.all(promises).then(() => {
-      sortedArray.sort(compare)
-      setGroupsArray(sortedArray)
-      setLoading(false)
-    })
-  }, [])
+      sortedArray.sort(compare);
+      setGroupsArray(sortedArray);
+      setLoading(false);
+    });
+  }, []);
 
-  let key: number = 0
+  let key: number = 0;
   return (
     <div>
       <div className="routing">
@@ -123,6 +124,7 @@ export function Groups(): JSX.Element {
                       picture={group.pictureURL}
                       members={group.members}
                       code={group.code}
+                      mzcode={group.mzcode}
                     />
                   </div>
                 )
@@ -130,7 +132,7 @@ export function Groups(): JSX.Element {
           </div>
         )}
     </div>
-  )
+  );
 }
 
 function Card(props: any): JSX.Element {
@@ -153,7 +155,11 @@ function Card(props: any): JSX.Element {
       </a>
       <p className="descriptions">{props.description}</p>
       <p className="members">Members: {props.members}</p>
-      <p className="code">Codice Teams: {props.code}</p>
+      {(props.mzcode != '') ? (
+        <div className="codes">
+          <p>Codice Teams A-L: {props.code}</p>
+          <p>Codice Teams M-Z: {props.mzcode}</p>
+        </div>) : (<p className="codes">Codice Teams: {props.code}</p>)}
     </ul>
-  )
+  );
 }
