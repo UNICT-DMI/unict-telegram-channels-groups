@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   firstYearGroupsNames,
   secondYearGroupsNames,
-  thirdYearGroupsNames
+  thirdYearGroupsNames,
 } from './groupsNames';
 
 interface GroupEntry {
@@ -25,7 +25,12 @@ export function Groups(): JSX.Element {
     const sortedArray: GroupEntry[] = [];
     const promises: Promise<any>[] = [];
 
-    function getData(year: string, groupName: string, code: string, mzcode: string): void {
+    function getData(
+      year: string,
+      groupName: string,
+      code: string,
+      mzcode: string
+    ): void {
       const newGroupEntry: GroupEntry = {
         title: '',
         link: '',
@@ -33,12 +38,14 @@ export function Groups(): JSX.Element {
         pictureURL: '',
         members: 0,
         code: '',
-        mzcode: ''
+        mzcode: '',
       };
 
       promises.push(
         fetch(
-          `https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`
+          `https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(
+            year + '/' + groupName
+          )}.json`
         )
           .then(res => res.json())
           .then(data => {
@@ -52,7 +59,9 @@ export function Groups(): JSX.Element {
               const tmpPic = data.image_link;
               newGroupEntry.pictureURL = tmpPic.substring(1);
             }
-            const tmpMembers: string[] = (data.members_number as string).split(' ');
+            const tmpMembers: string[] = (data.members_number as string).split(
+              ' '
+            );
             newGroupEntry.members = parseInt(tmpMembers[0]);
             newGroupEntry.code = code;
             newGroupEntry.mzcode = mzcode;
@@ -98,8 +107,7 @@ export function Groups(): JSX.Element {
       <input
         className="searchInput"
         placeholder="Search..."
-        onChange={input => setSearchInput(input.target.value)}
-      ></input>
+        onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
         <img
           src="loading.gif"
@@ -108,27 +116,27 @@ export function Groups(): JSX.Element {
           alt="loading"
         />
       ) : (
-          <div className="mainContent">
-            {groupsArray.map(
-              group =>
-                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                  <div className="cards" key={key++}>
-                    <Card
-                      ranking={key}
-                      isSearch={searchInput !== ''}
-                      title={group.title}
-                      link={group.link}
-                      description={group.description}
-                      picture={group.pictureURL}
-                      members={group.members}
-                      code={group.code}
-                      mzcode={group.mzcode}
-                    />
-                  </div>
-                )
-            )}
-          </div>
-        )}
+        <div className="mainContent">
+          {groupsArray.map(
+            group =>
+              group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                <div className="cards" key={key++}>
+                  <Card
+                    ranking={key}
+                    isSearch={searchInput !== ''}
+                    title={group.title}
+                    link={group.link}
+                    description={group.description}
+                    picture={group.pictureURL}
+                    members={group.members}
+                    code={group.code}
+                    mzcode={group.mzcode}
+                  />
+                </div>
+              )
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -153,11 +161,14 @@ function Card(props: any): JSX.Element {
       </a>
       <p className="descriptions">{props.description}</p>
       <p className="members">Members: {props.members}</p>
-      {(props.mzcode !== '') ? (
+      {props.mzcode !== '' ? (
         <div className="codes">
           <p>Codice Teams A-L: {props.code}</p>
           <p>Codice Teams M-Z: {props.mzcode}</p>
-        </div>) : (<p className="codes">Codice Teams: {props.code}</p>)}
+        </div>
+      ) : (
+        <p className="codes">Codice Teams: {props.code}</p>
+      )}
     </ul>
   );
 }

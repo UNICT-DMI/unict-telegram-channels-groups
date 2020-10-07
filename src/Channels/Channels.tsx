@@ -10,7 +10,8 @@ interface ChannelEntry {
   subscribers: number;
 }
 
-const API = 'https://seminaraluigi.altervista.org/list-telegram-groups/api.telegram.php?';
+const API =
+  'https://seminaraluigi.altervista.org/list-telegram-groups/api.telegram.php?';
 
 export function Channels(): JSX.Element {
   const [channelsArray, setChannelsArray] = useState<ChannelEntry[]>([]);
@@ -29,13 +30,11 @@ export function Channels(): JSX.Element {
         link: '',
         description: '',
         pictureURL: '',
-        subscribers: 0
+        subscribers: 0,
       };
 
       promises.push(
-        fetch(
-          `${API}chat=${channelName}`
-        )
+        fetch(`${API}chat=${channelName}`)
           .then(res => res.json())
           .then(data => {
             newChannelEntry.title = data.result.title;
@@ -44,19 +43,18 @@ export function Channels(): JSX.Element {
               ? data.result.description
               : '';
             promisesPictures.push(
-              fetch(
-                `${API}file=${data.result.photo.big_file_id}`
-              )
+              fetch(`${API}file=${data.result.photo.big_file_id}`)
                 .then(res => res.json())
-                .then(d => (newChannelEntry.pictureURL = `${API}path=${d.result.file_path}`))
+                .then(
+                  d =>
+                    (newChannelEntry.pictureURL = `${API}path=${d.result.file_path}`)
+                )
             );
           })
       );
 
       promisesSubscribers.push(
-        fetch(
-          `${API}count=${channelName}`
-        )
+        fetch(`${API}count=${channelName}`)
           .then(res => res.json())
           .then(data => (newChannelEntry.subscribers = data.result))
           .then(() => sortedArray.push(newChannelEntry))
@@ -96,14 +94,21 @@ export function Channels(): JSX.Element {
       <input
         className="searchInput"
         placeholder="Search..."
-        onChange={input => setSearchInput(input.target.value)}
-      ></input>
+        onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
-        <img src="loading.gif" className="loading" key="loading" alt="loading" />
+        <img
+          src="loading.gif"
+          className="loading"
+          key="loading"
+          alt="loading"
+        />
       ) : (
-          <div className="mainContent">
-            {channelsArray.map(channel =>
-              channel.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+        <div className="mainContent">
+          {channelsArray.map(
+            channel =>
+              channel.title
+                .toLowerCase()
+                .includes(searchInput.toLowerCase()) && (
                 <div className="cards" key={key++}>
                   <Card
                     ranking={key}
@@ -116,9 +121,9 @@ export function Channels(): JSX.Element {
                   />
                 </div>
               )
-            )}
-          </div>
-        )}
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -134,7 +139,9 @@ function Card(props: any): JSX.Element {
             alt={props.title + ' picture'}
           />
         </a>
-        <h2 className="rankings">{props.isSearch ? '' : props.ranking + '°'}</h2>
+        <h2 className="rankings">
+          {props.isSearch ? '' : props.ranking + '°'}
+        </h2>
       </div>
       <a className="links" href={props.link}>
         <h1>{props.title}</h1>
