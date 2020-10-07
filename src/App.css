@@ -90,7 +90,7 @@ body {
 }
 
 .rankings {
-  font-family: "Times New Roman", Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 3rem;
   color: lightgreen;
 }
@@ -103,8 +103,13 @@ body {
   color: white;
 }
 
-.subscribers {
+.subscribers,
+.members {
   color: lightgreen;
+}
+
+.codes {
+  color: #99573e;
 }
 
 .credits {

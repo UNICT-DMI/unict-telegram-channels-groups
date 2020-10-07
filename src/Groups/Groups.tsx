@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   firstYearGroupsNames,
   secondYearGroupsNames,
   thirdYearGroupsNames,
-} from "./groupsNames";
+} from './groupsNames';
 
 interface GroupEntry {
   title: string;
@@ -12,61 +12,74 @@ interface GroupEntry {
   description: string;
   pictureURL: string;
   members: number;
+  code: string;
+  mzcode: string;
 }
 
 export function Groups(): JSX.Element {
   const [groupsArray, setGroupsArray] = useState<GroupEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [searchInput, setSearchInput] = useState<string>("");
+  const [searchInput, setSearchInput] = useState<string>('');
 
   useEffect(() => {
     const sortedArray: GroupEntry[] = [];
     const promises: Promise<any>[] = [];
 
-    function getData(groupName: string, year: string): void {
+    function getData(
+      year: string,
+      groupName: string,
+      code: string,
+      mzcode: string
+    ): void {
       const newGroupEntry: GroupEntry = {
-        title: "",
-        link: "",
-        description: "",
-        pictureURL: "",
+        title: '',
+        link: '',
+        description: '',
+        pictureURL: '',
         members: 0,
+        code: '',
+        mzcode: '',
       };
 
       promises.push(
         fetch(
-          `https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`
+          `https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(
+            year + '/' + groupName
+          )}.json`
         )
           .then(res => res.json())
           .then(data => {
             newGroupEntry.title = groupName;
-            let tmpLink: string = data.link;
+            const tmpLink: string = data.link;
             newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
             newGroupEntry.description = data.description;
             if (data.image_link === '') {
               newGroupEntry.pictureURL = 'telegram.svg';
             } else {
-              let tmpPic = data.image_link;
+              const tmpPic = data.image_link;
               newGroupEntry.pictureURL = tmpPic.substring(1);
             }
-            let tmpMembers: string[] = (data.members_number as string).split(
-              " "
+            const tmpMembers: string[] = (data.members_number as string).split(
+              ' '
             );
             newGroupEntry.members = parseInt(tmpMembers[0]);
+            newGroupEntry.code = code;
+            newGroupEntry.mzcode = mzcode;
           })
           .then(() => sortedArray.push(newGroupEntry))
       );
     }
 
     for (const group of firstYearGroupsNames) {
-      getData(group, "PRIMO_ANNO");
+      getData('PRIMO_ANNO', group.title, group.code, group.mzcode);
     }
 
     for (const group of secondYearGroupsNames) {
-      getData(group, "SECONDO_ANNO");
+      getData('SECONDO_ANNO', group.title, group.code, group.mzcode);
     }
 
     for (const group of thirdYearGroupsNames) {
-      getData(group, "TERZO_ANNO");
+      getData('TERZO_ANNO', group.title, group.code, '');
     }
 
     function compare(a: GroupEntry, b: GroupEntry): number {
@@ -94,26 +107,33 @@ export function Groups(): JSX.Element {
       <input
         className="searchInput"
         placeholder="Search..."
-        onChange={input => setSearchInput(input.target.value)}
-      ></input>
+        onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
-        <img src="loading.gif" className="loading" key="loading" alt="loading" />
+        <img
+          src="loading.gif"
+          className="loading"
+          key="loading"
+          alt="loading"
+        />
       ) : (
         <div className="mainContent">
-          {groupsArray.map(group =>
-            group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-              <div className="cards" key={key++}>
-                <Card
-                  ranking={key}
-                  isSearch={searchInput !== ""}
-                  title={group.title}
-                  link={group.link}
-                  description={group.description}
-                  picture={group.pictureURL}
-                  subscribers={group.members}
-                />
-              </div>
-            )
+          {groupsArray.map(
+            group =>
+              group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                <div className="cards" key={key++}>
+                  <Card
+                    ranking={key}
+                    isSearch={searchInput !== ''}
+                    title={group.title}
+                    link={group.link}
+                    description={group.description}
+                    picture={group.pictureURL}
+                    members={group.members}
+                    code={group.code}
+                    mzcode={group.mzcode}
+                  />
+                </div>
+              )
           )}
         </div>
       )}
@@ -129,18 +149,26 @@ function Card(props: any): JSX.Element {
           <img
             className="images"
             src={props.picture}
-            alt={props.title + " picture"}
+            alt={props.title + ' picture'}
           />
         </a>
         <h2 className="rankings">
-          {props.isSearch ? "" : props.ranking + "°"}
+          {props.isSearch ? '' : props.ranking + '°'}
         </h2>
       </div>
       <a className="links" href={props.link}>
         <h1>{props.title}</h1>
       </a>
       <p className="descriptions">{props.description}</p>
-      <p className="subscribers">Subscribers: {props.subscribers}</p>
+      <p className="members">Members: {props.members}</p>
+      {props.mzcode !== '' ? (
+        <div className="codes">
+          <p>Codice Teams A-L: {props.code}</p>
+          <p>Codice Teams M-Z: {props.mzcode}</p>
+        </div>
+      ) : (
+        <p className="codes">Codice Teams: {props.code}</p>
+      )}
     </ul>
   );
 }
