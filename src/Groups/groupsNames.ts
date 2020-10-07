@@ -13,7 +13,9 @@ export const firstYearGroupsNames: SubjectDistinct[] = [
   { title: 'FONDAMENTI DI INFORMATICA', code: 'ejrynpm', mzcode: 'c2j8hks' },
   { title: 'PROGRAMMAZIONE I E LABORATORIO', code: '2v8sv7c', mzcode: 'qtrs803' },
   { title: 'PROGRAMMAZIONE II', code: 'lmygl88', mzcode: '2a1gpff' },
-  { title: 'ULTERIORI CONOSCENZE LINGUISTICHE', code: 'tf42bu0', mzcode: '' }
+  { title: 'ULTERIORI CONOSCENZE LINGUISTICHE', code: 'tf42bu0', mzcode: '' },
+  { title: "ALGEBRA LINEARE E GEOMETRIA", code: "tv73vxy", mzcode: "7ul1o62" },
+  { title: "STRUTTURE DISCRETE", code: "nn0ukwu", mzcode: "vmwcsyn" }
 ];
 
 export const secondYearGroupsNames: SubjectDistinct[] = [
@@ -23,7 +25,7 @@ export const secondYearGroupsNames: SubjectDistinct[] = [
   { title: 'INGEGNERIA DEL SOFTWARE', code: '0dg7gab', mzcode: '' },
   { title: 'RETI DI CALCOLATORI', code: '7emlunl', mzcode: '' },
   { title: 'SISTEMI OPERATIVI', code: 'i412gv5', mzcode: 'qlxao81' },
-  { title: '[Discussione] I&M 2019_2020', code: '', mzcode: '' }
+  { title: '[Discussione] Interazione e Multimedia L-31', code: '1vd4wnf', mzcode: 'twrmvmm' }
 ];
 
 export const thirdYearGroupsNames: Subject[] = [

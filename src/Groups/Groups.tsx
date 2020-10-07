@@ -38,9 +38,7 @@ export function Groups(): JSX.Element {
 
       promises.push(
         fetch(
-          `https://usefulness.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(
-            year + '/' + groupName
-          )}.json`
+          `https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`
         )
           .then(res => res.json())
           .then(data => {
@@ -155,7 +153,7 @@ function Card(props: any): JSX.Element {
       </a>
       <p className="descriptions">{props.description}</p>
       <p className="members">Members: {props.members}</p>
-      {(props.mzcode != '') ? (
+      {(props.mzcode !== '') ? (
         <div className="codes">
           <p>Codice Teams A-L: {props.code}</p>
           <p>Codice Teams M-Z: {props.mzcode}</p>
