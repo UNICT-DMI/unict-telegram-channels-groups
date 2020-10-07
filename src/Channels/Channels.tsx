@@ -10,7 +10,7 @@ interface ChannelEntry {
   subscribers: number;
 }
 
-const API = 'https://usefulness.altervista.org/list-telegram-groups/api.telegram.php?';
+const API = 'https://seminaraluigi.altervista.org/list-telegram-groups/api.telegram.php?';
 
 export function Channels(): JSX.Element {
   const [channelsArray, setChannelsArray] = useState<ChannelEntry[]>([]);

@@ -2,7 +2,8 @@ export const firstYearGroupsNames: string[] = [
   "ARCHITETTURA DEGLI ELABORATORI E LABORATORIO",
   "ELEMENTI DI ANALISI MATEMATICA 1",
   "FONDAMENTI DI INFORMATICA",
-  "MATEMATICA DISCRETA",
+  "ALGEBRA LINEARE E GEOMETRIA",
+  "STRUTTURE DISCRETE",
   "PROGRAMMAZIONE I E LABORATORIO",
   "PROGRAMMAZIONE II",
   "ULTERIORI CONOSCENZE LINGUISTICHE",
@@ -15,7 +16,7 @@ export const secondYearGroupsNames: string[] = [
   "INGEGNERIA DEL SOFTWARE",
   "RETI DI CALCOLATORI",
   "SISTEMI OPERATIVI",
-  "[Discussione] I&M 2019_2020",
+  "[Discussione] Interazione e Multimedia L-31",
 ];
 
 export const thirdYearGroupsNames: string[] = [
