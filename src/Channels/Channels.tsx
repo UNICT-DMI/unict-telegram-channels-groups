@@ -10,7 +10,7 @@ interface ChannelEntry {
   subscribers: number;
 }
 
-const API =
+const API: string =
   'https://seminaraluigi.altervista.org/list-telegram-groups/api.telegram.php?';
 
 export function Channels(): JSX.Element {
