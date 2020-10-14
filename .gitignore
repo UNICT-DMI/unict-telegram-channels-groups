@@ -4,3 +4,7 @@ package-lock.json
 
 # production
 /build
+
+# testing
+/coverage
+

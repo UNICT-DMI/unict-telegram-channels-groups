@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../Card/Card';
 import {
+  API,
   firstYearGroupsNames,
   secondYearGroupsNames,
   thirdYearGroupsNames,
@@ -26,12 +27,7 @@ export function Groups(): JSX.Element {
     const sortedArray: GroupEntry[] = [];
     const promises: Promise<any>[] = [];
 
-    function getData(
-      year: string,
-      groupName: string,
-      code: string,
-      mzcode: string
-    ): void {
+    function getData(year: string, groupName: string, code: string, mzcode: string): void {
       const newGroupEntry: GroupEntry = {
         title: '',
         link: '',
@@ -44,25 +40,24 @@ export function Groups(): JSX.Element {
 
       promises.push(
         fetch(
-          `https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=${encodeURIComponent(
-            year + '/' + groupName
-          )}.json`
+          `${API}/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`
         )
           .then(res => res.json())
           .then(data => {
-            newGroupEntry.title = groupName;
+
             const tmpLink: string = data.link;
+            newGroupEntry.title = groupName;
             newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
             newGroupEntry.description = data.description;
+
             if (data.image_link === '') {
               newGroupEntry.pictureURL = 'telegram.svg';
             } else {
               const tmpPic = data.image_link;
               newGroupEntry.pictureURL = tmpPic.substring(1);
             }
-            const tmpMembers: string[] = (data.members_number as string).split(
-              ' '
-            );
+
+            const tmpMembers: string[] = (data.members_number as string).split(' ');
             newGroupEntry.members = parseInt(tmpMembers[0]);
             newGroupEntry.code = code;
             newGroupEntry.mzcode = mzcode;
@@ -96,7 +91,6 @@ export function Groups(): JSX.Element {
     });
   }, []);
 
-  let key: number = 0;
   return (
     <div>
       <div className="routing">
@@ -119,11 +113,11 @@ export function Groups(): JSX.Element {
       ) : (
         <div className="mainContent">
           {groupsArray.map(
-            group =>
+            (group, index) =>
               group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                <div className="cards" key={key++}>
+                <div className="cards" key={index++}>
                   <Card
-                    ranking={key}
+                    ranking={index}
                     isSearch={searchInput !== ''}
                     title={group.title}
                     link={group.link}
