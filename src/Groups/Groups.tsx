@@ -163,11 +163,11 @@ function Card(props: any): JSX.Element {
       <p className="members">Members: {props.members}</p>
       {props.mzcode !== '' ? (
         <div className="codes">
-          <p>Codice Teams A-L: {props.code}</p>
-          <p>Codice Teams M-Z: {props.mzcode}</p>
+          <p>Codice Teams A-L: <b className="code">{props.code}</b></p>
+          <p>Codice Teams M-Z: <b className="code">{props.mzcode}</b></p>
         </div>
       ) : (
-        <p className="codes">Codice Teams: {props.code}</p>
+        <p className="codes">Codice Teams: <b className="code">{props.code}</b></p>
       )}
     </ul>
   );
