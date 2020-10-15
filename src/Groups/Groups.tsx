@@ -88,19 +88,19 @@ export function Groups(): JSX.Element {
   return (
     <div>
       <div className="routing">
-        <h1 className="rankingTitle">Classifica gruppi DMI UNICT</h1>
-        <Link to="/channels" className="goToChannelsLink">
+        <h1 className="ranking-title">Classifica gruppi DMI UNICT</h1>
+        <Link to="/channels" className="link-to-channels">
           Visualizza Canali UNICT
         </Link>
       </div>
       <input
-        className="searchInput"
+        className="search-input-field"
         placeholder="Search..."
         onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
         <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
-        <div className="mainContent">
+        <div className="contents-grid">
           {groupsArray.map(
             (group, index) =>
               group.title.toLowerCase().includes(searchInput.toLowerCase()) && (

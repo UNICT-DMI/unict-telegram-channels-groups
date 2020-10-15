@@ -1,3 +1,64 @@
+.cards {
+  display: block;
+  height: auto;
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 2rem;
+  box-shadow: -1rem 1rem 1rem #001020;
+  background-color: #343a40;
+  transition: 0.3s;
+}
+
+.cards:hover {
+  background-color: #343a50;
+  transform: translateY(-1rem);
+}
+
+.cards:nth-child(1):hover {
+  background-color: #808000;
+}
+
+.cards:nth-child(2):hover {
+  background-color: #808080;
+}
+
+.cards:nth-child(3):hover {
+  background-color: #663300;
+}
+
+.all-cards-contents {
+  margin: 0;
+  padding: 0;
+}
+
+.images-and-rankings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.images {
+  width: 50%;
+}
+
+.rankings {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 3rem;
+  color: lightgreen;
+}
+
+.links {
+  color: lightblue;
+}
+
+.descriptions {
+  color: white;
+}
+
+.subscribers,
+.members {
+  color: lightgreen;
+}
+
 .codes {
   color: #ff9800;
 }

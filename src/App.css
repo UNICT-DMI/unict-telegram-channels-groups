@@ -8,21 +8,21 @@ body {
   justify-content: center;
 }
 
-.goToGroupsLink {
+.link-to-channels {
   position: absolute;
   right: 3rem;
   font-size: 1.5rem;
   color: lightblue;
 }
 
-.goToChannelsLink {
+.link-to-groups {
   position: absolute;
   right: 3rem;
   font-size: 1.5rem;
   color: lightblue;
 }
 
-.rankingTitle {
+.ranking-title {
   text-align: center;
   color: white;
 }
@@ -33,7 +33,7 @@ body {
   margin: 1rem auto;
 }
 
-.searchInput {
+.search-input-field {
   display: block;
   margin: auto;
   padding: 0.5rem;
@@ -42,70 +42,9 @@ body {
   background-color: #343a40;
 }
 
-.mainContent {
+.contents-grid {
   display: grid;
   grid-template-columns: 33% 33% 34%;
-}
-
-.cards {
-  display: block;
-  height: auto;
-  padding: 2rem;
-  margin: 2rem;
-  border-radius: 2rem;
-  box-shadow: -1rem 1rem 1rem #001020;
-  background-color: #343a40;
-  transition: 0.3s;
-}
-
-.cards:hover {
-  background-color: #343a50;
-  transform: translateY(-1rem);
-}
-
-.cards:nth-child(1):hover {
-  background-color: #808000;
-}
-
-.cards:nth-child(2):hover {
-  background-color: #808080;
-}
-
-.cards:nth-child(3):hover {
-  background-color: #663300;
-}
-
-.actualCardsContents {
-  margin: 0;
-  padding: 0;
-}
-
-.imageAndRanking {
-  display: flex;
-  justify-content: space-between;
-}
-
-.images {
-  width: 50%;
-}
-
-.rankings {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 3rem;
-  color: lightgreen;
-}
-
-.links {
-  color: lightblue;
-}
-
-.descriptions {
-  color: white;
-}
-
-.subscribers,
-.members {
-  color: lightgreen;
 }
 
 .credits {
@@ -132,14 +71,14 @@ body {
     margin: auto;
   }
 
-  .goToGroupsLink {
+  .link-to-groups {
     position: static;
     display: block;
     text-align: center;
     margin: 1rem;
   }
 
-  .goToChannelsLink {
+  .link-to-channels {
     position: static;
     display: block;
     text-align: center;

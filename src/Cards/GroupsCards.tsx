@@ -15,8 +15,8 @@ interface PropCard {
 
 function GroupsCards(props: PropCard): JSX.Element {
   return (
-    <ul className="actualCardsContents">
-      <div className="imageAndRanking">
+    <ul className="all-cards-contents">
+      <div className="images-and-rankings">
         <a href={props.link}>
           <img
             className="images"

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { channelsNames } from './channelsNames';
 import { Link } from 'react-router-dom';
+import { channelsNames } from './channelsNames';
+import ChannelsCards from '../Cards/ChannelsCards';
 
 interface ChannelEntry {
   title: string;
@@ -80,24 +81,24 @@ export function Channels(): JSX.Element {
   return (
     <div>
       <div className="routing">
-        <h1 className="rankingTitle">Classifica canali UNICT</h1>
-        <Link to="/groups" className="goToGroupsLink">
+        <h1 className="ranking-title">Classifica canali UNICT</h1>
+        <Link to="/groups" className="link-to-groups">
           Visualizza Gruppi DMI UNICT
         </Link>
       </div>
       <input
-        className="searchInput"
+        className="search-input-field"
         placeholder="Search..."
         onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
         <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
-        <div className="mainContent">
+        <div className="contents-grid">
           {channelsArray.map(
             channel =>
               channel.title.toLowerCase().includes(searchInput.toLowerCase()) && (
                 <div className="cards" key={key++}>
-                  <Card
+                  <ChannelsCards
                     ranking={key}
                     isSearch={searchInput !== ''}
                     title={channel.title}
@@ -112,23 +113,5 @@ export function Channels(): JSX.Element {
         </div>
       )}
     </div>
-  );
-}
-
-function Card(props: any): JSX.Element {
-  return (
-    <ul className="actualCardsContents">
-      <div className="imageAndRanking">
-        <a href={props.link}>
-          <img className="images" src={props.picture} alt={props.title + ' picture'} />
-        </a>
-        <h2 className="rankings">{props.isSearch ? '' : props.ranking + '°'}</h2>
-      </div>
-      <a className="links" href={props.link}>
-        <h1>{props.title}</h1>
-      </a>
-      <p className="descriptions">{props.description}</p>
-      <p className="subscribers">Subscribers: {props.subscribers}</p>
-    </ul>
   );
 }
