@@ -10,8 +10,7 @@ interface ChannelEntry {
   subscribers: number;
 }
 
-const API: string =
-  'https://seminaraluigi.altervista.org/list-telegram-groups/api.telegram.php?';
+const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/api.telegram.php?';
 
 export function Channels(): JSX.Element {
   const [channelsArray, setChannelsArray] = useState<ChannelEntry[]>([]);
@@ -39,16 +38,11 @@ export function Channels(): JSX.Element {
           .then(data => {
             newChannelEntry.title = data.result.title;
             newChannelEntry.link = `https://t.me/${channelName}`;
-            newChannelEntry.description = data.result.description
-              ? data.result.description
-              : '';
+            newChannelEntry.description = data.result.description ? data.result.description : '';
             promisesPictures.push(
               fetch(`${API}file=${data.result.photo.big_file_id}`)
                 .then(res => res.json())
-                .then(
-                  d =>
-                    (newChannelEntry.pictureURL = `${API}path=${d.result.file_path}`)
-                )
+                .then(d => (newChannelEntry.pictureURL = `${API}path=${d.result.file_path}`))
             );
           })
       );
@@ -96,19 +90,12 @@ export function Channels(): JSX.Element {
         placeholder="Search..."
         onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
-        <img
-          src="loading.gif"
-          className="loading"
-          key="loading"
-          alt="loading"
-        />
+        <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
         <div className="mainContent">
           {channelsArray.map(
             channel =>
-              channel.title
-                .toLowerCase()
-                .includes(searchInput.toLowerCase()) && (
+              channel.title.toLowerCase().includes(searchInput.toLowerCase()) && (
                 <div className="cards" key={key++}>
                   <Card
                     ranking={key}
@@ -133,15 +120,9 @@ function Card(props: any): JSX.Element {
     <ul className="actualCardsContents">
       <div className="imageAndRanking">
         <a href={props.link}>
-          <img
-            className="images"
-            src={props.picture}
-            alt={props.title + ' picture'}
-          />
+          <img className="images" src={props.picture} alt={props.title + ' picture'} />
         </a>
-        <h2 className="rankings">
-          {props.isSearch ? '' : props.ranking + '°'}
-        </h2>
+        <h2 className="rankings">{props.isSearch ? '' : props.ranking + '°'}</h2>
       </div>
       <a className="links" href={props.link}>
         <h1>{props.title}</h1>
