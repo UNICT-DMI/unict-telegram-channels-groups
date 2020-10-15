@@ -4,6 +4,8 @@ import { Channels } from './Channels/Channels';
 import { Groups } from './Groups/Groups';
 import './App.css';
 
+export const API = 'https://seminaraluigi.altervista.org/list-telegram-groups';
+
 function App(): JSX.Element {
   return (
     <div className="App">

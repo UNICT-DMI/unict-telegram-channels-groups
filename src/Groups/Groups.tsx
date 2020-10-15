@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../Card/Card';
-import {
-  API,
-  firstYearGroupsNames,
-  secondYearGroupsNames,
-  thirdYearGroupsNames,
-} from './groupsNames';
+import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
+import { API } from '../App';
+import Card from '../Cards/Card';
 
 interface GroupEntry {
   title: string;
@@ -39,12 +35,9 @@ export function Groups(): JSX.Element {
       };
 
       promises.push(
-        fetch(
-          `${API}/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`
-        )
+        fetch(`${API}/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`)
           .then(res => res.json())
           .then(data => {
-
             const tmpLink: string = data.link;
             newGroupEntry.title = groupName;
             newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
@@ -104,12 +97,7 @@ export function Groups(): JSX.Element {
         placeholder="Search..."
         onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
-        <img
-          src="loading.gif"
-          className="loading"
-          key="loading"
-          alt="loading"
-        />
+        <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
         <div className="mainContent">
           {groupsArray.map(
