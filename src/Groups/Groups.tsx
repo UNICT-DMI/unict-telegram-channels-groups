@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
-import Card from '../Cards/Card';
+import GroupsCards from '../Cards/GroupsCards';
 
 const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
 
@@ -105,7 +105,7 @@ export function Groups(): JSX.Element {
             (group, index) =>
               group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
                 <div className="cards" key={index++}>
-                  <Card
+                  <GroupsCards
                     ranking={index}
                     isSearch={searchInput !== ''}
                     title={group.title}
