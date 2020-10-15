@@ -7,8 +7,6 @@ interface SubjectDistinct extends Subject {
   mzcode: string;
 }
 
-export const API = 'https://seminaraluigi.altervista.org/list-telegram-groups';
-
 export const firstYearGroupsNames: SubjectDistinct[] = [
   {
     title: 'ARCHITETTURA DEGLI ELABORATORI E LABORATORIO',

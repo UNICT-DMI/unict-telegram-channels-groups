@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../Card/Card';
-import {
-  API,
-  firstYearGroupsNames,
-  secondYearGroupsNames,
-  thirdYearGroupsNames,
-} from './groupsNames';
+import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
+import GroupsCards from '../Cards/GroupsCards';
+
+export const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
 
 interface GroupEntry {
   title: string;
@@ -39,12 +36,9 @@ export function Groups(): JSX.Element {
       };
 
       promises.push(
-        fetch(
-          `${API}/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`
-        )
+        fetch(`${API}/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`)
           .then(res => res.json())
           .then(data => {
-
             const tmpLink: string = data.link;
             newGroupEntry.title = groupName;
             newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
@@ -94,29 +88,24 @@ export function Groups(): JSX.Element {
   return (
     <div>
       <div className="routing">
-        <h1 className="rankingTitle">Classifica gruppi DMI UNICT</h1>
-        <Link to="/channels" className="goToChannelsLink">
+        <h1 className="ranking-title">Classifica gruppi DMI UNICT</h1>
+        <Link to="/channels" className="link-to-channels">
           Visualizza Canali UNICT
         </Link>
       </div>
       <input
-        className="searchInput"
+        className="search-input-field"
         placeholder="Search..."
         onChange={input => setSearchInput(input.target.value)}></input>
       {loading ? (
-        <img
-          src="loading.gif"
-          className="loading"
-          key="loading"
-          alt="loading"
-        />
+        <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
-        <div className="mainContent">
+        <div className="contents-grid">
           {groupsArray.map(
             (group, index) =>
               group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
                 <div className="cards" key={index++}>
-                  <Card
+                  <GroupsCards
                     ranking={index}
                     isSearch={searchInput !== ''}
                     title={group.title}

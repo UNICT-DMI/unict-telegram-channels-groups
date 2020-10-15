@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';
+import './Cards.css';
 
 interface PropCard {
   link: string;
@@ -13,10 +13,10 @@ interface PropCard {
   code: string;
 }
 
-function Card(props: PropCard): JSX.Element {
+function GroupsCards(props: PropCard): JSX.Element {
   return (
-    <ul className="actualCardsContents">
-      <div className="imageAndRanking">
+    <ul className="all-cards-contents">
+      <div className="images-and-rankings">
         <a href={props.link}>
           <img
             className="images"
@@ -45,4 +45,4 @@ function Card(props: PropCard): JSX.Element {
   );
 }
 
-export default Card;
+export default GroupsCards;
