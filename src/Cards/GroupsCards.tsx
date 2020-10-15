@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cards.css';
 
-interface PropCard {
+interface Props {
   link: string;
   title: string;
   description: string;
@@ -13,7 +13,7 @@ interface PropCard {
   code: string;
 }
 
-function GroupsCards(props: PropCard): JSX.Element {
+function GroupsCards(props: Props): JSX.Element {
   return (
     <ul className="all-cards-contents">
       <div className="images-and-rankings">

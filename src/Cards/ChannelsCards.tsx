@@ -1,7 +1,17 @@
 import React from 'react';
 import './Cards.css';
 
-export function ChannelsCards(props: any): JSX.Element {
+interface Props {
+  link: string;
+  title: string;
+  description: string;
+  picture: string;
+  isSearch: boolean;
+  ranking: number;
+  subscribers: number;
+}
+
+export function ChannelsCards(props: Props): JSX.Element {
   return (
     <ul className="all-cards-contents">
       <div className="images-and-rankings">
