@@ -28,4 +28,5 @@ export const channelsNames: string[] = [
   'IngEleNews',
   'IngIndNews',
   'Spotted_DMI',
+  'SfottedDIEEI',
 ];
