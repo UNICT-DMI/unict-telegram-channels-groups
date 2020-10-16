@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should take a snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="routing"
+    >
+      <h1
+        class="ranking-title"
+      >
+        Classifica canali UNICT
+      </h1>
+      <a
+        class="link-to-groups"
+        href="/groups"
+      >
+        Visualizza Gruppi DMI UNICT
+      </a>
+    </div>
+    <input
+      class="search-input-field"
+      placeholder="Search..."
+    />
+    <img
+      alt="loading"
+      class="loading"
+      src="loading.gif"
+    />
+  </div>
+</DocumentFragment>
+`;
