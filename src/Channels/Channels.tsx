@@ -77,7 +77,6 @@ export function Channels(): JSX.Element {
     );
   }, []);
 
-  let key: number = 0;
   return (
     <div>
       <div className="routing">
@@ -95,11 +94,11 @@ export function Channels(): JSX.Element {
       ) : (
         <div className="contents-grid">
           {channelsArray.map(
-            channel =>
+            (channel, index) =>
               channel.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                <div className="cards" key={key++}>
+                <div className="cards" key={index++}>
                   <ChannelsCards
-                    ranking={key}
+                    ranking={index}
                     isSearch={searchInput !== ''}
                     title={channel.title}
                     link={channel.link}
