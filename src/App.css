@@ -42,6 +42,11 @@ body {
   background-color: #343a40;
 }
 
+.years-sections-title {
+  text-align: center;
+  color: white;
+}
+
 .contents-grid {
   display: grid;
   grid-template-columns: 33% 33% 34%;

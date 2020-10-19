@@ -5,6 +5,10 @@ import GroupsCards from '../Cards/GroupsCards';
 
 export const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
 
+const primo: string = 'PRIMO_ANNO';
+const secondo: string = 'SECONDO_ANNO';
+const terzo: string = 'TERZO_ANNO';
+
 interface GroupEntry {
   title: string;
   link: string;
@@ -16,12 +20,16 @@ interface GroupEntry {
 }
 
 export function Groups(): JSX.Element {
-  const [groupsArray, setGroupsArray] = useState<GroupEntry[]>([]);
+  const [firstYearGroupsArray, setFirstYearGroupsArray] = useState<GroupEntry[]>([]);
+  const [secondYearGroupsArray, setSecondYearGroupsArray] = useState<GroupEntry[]>([]);
+  const [thirdYearGroupsArray, setThirdYearGroupsArray] = useState<GroupEntry[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [searchInput, setSearchInput] = useState<string>('');
 
   useEffect(() => {
-    const sortedArray: GroupEntry[] = [];
+    let firstYearGroupsTmpArray: GroupEntry[] = [];
+    let secondYearGroupsTmpArray: GroupEntry[] = [];
+    let thirdYearGroupsTmpArray: GroupEntry[] = [];
     const promises: Promise<any>[] = [];
 
     function getData(year: string, groupName: string, code: string, mzcode: string): void {
@@ -56,20 +64,28 @@ export function Groups(): JSX.Element {
             newGroupEntry.code = code;
             newGroupEntry.mzcode = mzcode;
           })
-          .then(() => sortedArray.push(newGroupEntry))
+          .then(() => {
+            if (year === primo) {
+              firstYearGroupsTmpArray.push(newGroupEntry);
+            } else if (year === secondo) {
+              secondYearGroupsTmpArray.push(newGroupEntry);
+            } else {
+              thirdYearGroupsTmpArray.push(newGroupEntry);
+            }
+          })
       );
     }
 
     for (const group of firstYearGroupsNames) {
-      getData('PRIMO_ANNO', group.title, group.code, group.mzcode);
+      getData(primo, group.title, group.code, group.mzcode);
     }
 
     for (const group of secondYearGroupsNames) {
-      getData('SECONDO_ANNO', group.title, group.code, group.mzcode);
+      getData(secondo, group.title, group.code, group.mzcode);
     }
 
     for (const group of thirdYearGroupsNames) {
-      getData('TERZO_ANNO', group.title, group.code, '');
+      getData(terzo, group.title, group.code, '');
     }
 
     function compare(a: GroupEntry, b: GroupEntry): number {
@@ -79,8 +95,12 @@ export function Groups(): JSX.Element {
     }
 
     Promise.all(promises).then(() => {
-      sortedArray.sort(compare);
-      setGroupsArray(sortedArray);
+      firstYearGroupsTmpArray.sort(compare);
+      secondYearGroupsTmpArray.sort(compare);
+      thirdYearGroupsTmpArray.sort(compare);
+      setFirstYearGroupsArray(firstYearGroupsTmpArray);
+      setSecondYearGroupsArray(secondYearGroupsTmpArray);
+      setThirdYearGroupsArray(thirdYearGroupsTmpArray);
       setLoading(false);
     });
   }, []);
@@ -100,25 +120,70 @@ export function Groups(): JSX.Element {
       {loading ? (
         <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
-        <div className="contents-grid">
-          {groupsArray.map(
-            (group, index) =>
-              group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                <div className="cards" key={index++}>
-                  <GroupsCards
-                    ranking={index}
-                    isSearch={searchInput !== ''}
-                    title={group.title}
-                    link={group.link}
-                    description={group.description}
-                    picture={group.pictureURL}
-                    members={group.members}
-                    code={group.code}
-                    mzcode={group.mzcode}
-                  />
-                </div>
-              )
-          )}
+        <div>
+          <h2 className="years-sections-title">Primo anno</h2>
+          <div className="contents-grid">
+            {firstYearGroupsArray.map(
+              (group, index) =>
+                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                  <div className="cards" key={index++}>
+                    <GroupsCards
+                      ranking={index}
+                      isSearch={searchInput !== ''}
+                      title={group.title}
+                      link={group.link}
+                      description={group.description}
+                      picture={group.pictureURL}
+                      members={group.members}
+                      code={group.code}
+                      mzcode={group.mzcode}
+                    />
+                  </div>
+                )
+            )}
+          </div>
+          <h2 className="years-sections-title">Secondo anno</h2>
+          <div className="contents-grid">
+            {secondYearGroupsArray.map(
+              (group, index) =>
+                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                  <div className="cards" key={index++}>
+                    <GroupsCards
+                      ranking={index}
+                      isSearch={searchInput !== ''}
+                      title={group.title}
+                      link={group.link}
+                      description={group.description}
+                      picture={group.pictureURL}
+                      members={group.members}
+                      code={group.code}
+                      mzcode={group.mzcode}
+                    />
+                  </div>
+                )
+            )}
+          </div>
+          <h2 className="years-sections-title">Terzo anno</h2>
+          <div className="contents-grid">
+            {thirdYearGroupsArray.map(
+              (group, index) =>
+                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                  <div className="cards" key={index++}>
+                    <GroupsCards
+                      ranking={index}
+                      isSearch={searchInput !== ''}
+                      title={group.title}
+                      link={group.link}
+                      description={group.description}
+                      picture={group.pictureURL}
+                      members={group.members}
+                      code={group.code}
+                      mzcode={group.mzcode}
+                    />
+                  </div>
+                )
+            )}
+          </div>
         </div>
       )}
     </div>
