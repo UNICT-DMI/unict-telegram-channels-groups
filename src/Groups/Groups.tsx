@@ -105,12 +105,16 @@ export function Groups(): JSX.Element {
     });
   }, []);
 
-  let arrays: GroupEntry[][] = [firstYearGroupsArray, secondYearGroupsArray, thirdYearGroupsArray];
-  enum sectionsTitle {
-    'Primo Anno',
-    'Secondo Anno',
-    'Terzo Anno',
+  interface ArrayEntry {
+    array: GroupEntry[];
+    sectionTitle: string;
   }
+
+  let arrays: ArrayEntry[] = [
+    { array: firstYearGroupsArray, sectionTitle: 'Primo Anno' },
+    { array: secondYearGroupsArray, sectionTitle: 'Secondo Anno' },
+    { array: thirdYearGroupsArray, sectionTitle: 'Terzo Anno' },
+  ];
 
   return (
     <div>
@@ -128,11 +132,11 @@ export function Groups(): JSX.Element {
         <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
         <div>
-          {arrays.map((array, index) => (
+          {arrays.map((specificArray, index) => (
             <div key={index}>
-              <h2 className="years-sections-title">{sectionsTitle[index]}</h2>
+              <h2 className="years-sections-title">{specificArray.sectionTitle}</h2>
               <div className="contents-grid">
-                {array.map(
+                {specificArray.array.map(
                   (group, index) =>
                     group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
                       <div className="cards" key={index}>
