@@ -5,9 +5,9 @@ import GroupsCards from '../Cards/GroupsCards';
 
 export const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
 
-const primo: string = 'PRIMO_ANNO';
-const secondo: string = 'SECONDO_ANNO';
-const terzo: string = 'TERZO_ANNO';
+const first: string = 'PRIMO_ANNO';
+const second: string = 'SECONDO_ANNO';
+const third: string = 'TERZO_ANNO';
 
 interface GroupEntry {
   title: string;
@@ -65,9 +65,9 @@ export function Groups(): JSX.Element {
             newGroupEntry.mzcode = mzcode;
           })
           .then(() => {
-            if (year === primo) {
+            if (year === first) {
               firstYearGroupsTmpArray.push(newGroupEntry);
-            } else if (year === secondo) {
+            } else if (year === second) {
               secondYearGroupsTmpArray.push(newGroupEntry);
             } else {
               thirdYearGroupsTmpArray.push(newGroupEntry);
@@ -77,15 +77,15 @@ export function Groups(): JSX.Element {
     }
 
     for (const group of firstYearGroupsNames) {
-      getData(primo, group.title, group.code, group.mzcode);
+      getData(first, group.title, group.code, group.mzcode);
     }
 
     for (const group of secondYearGroupsNames) {
-      getData(secondo, group.title, group.code, group.mzcode);
+      getData(second, group.title, group.code, group.mzcode);
     }
 
     for (const group of thirdYearGroupsNames) {
-      getData(terzo, group.title, group.code, '');
+      getData(third, group.title, group.code, '');
     }
 
     function compare(a: GroupEntry, b: GroupEntry): number {
@@ -105,6 +105,13 @@ export function Groups(): JSX.Element {
     });
   }, []);
 
+  let arrays: GroupEntry[][] = [firstYearGroupsArray, secondYearGroupsArray, thirdYearGroupsArray];
+  enum sectionsTitle {
+    'Primo Anno',
+    'Secondo Anno',
+    'Terzo Anno',
+  }
+
   return (
     <div>
       <div className="routing">
@@ -121,69 +128,31 @@ export function Groups(): JSX.Element {
         <img src="loading.gif" className="loading" key="loading" alt="loading" />
       ) : (
         <div>
-          <h2 className="years-sections-title">Primo anno</h2>
-          <div className="contents-grid">
-            {firstYearGroupsArray.map(
-              (group, index) =>
-                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                  <div className="cards" key={index++}>
-                    <GroupsCards
-                      ranking={index}
-                      isSearch={searchInput !== ''}
-                      title={group.title}
-                      link={group.link}
-                      description={group.description}
-                      picture={group.pictureURL}
-                      members={group.members}
-                      code={group.code}
-                      mzcode={group.mzcode}
-                    />
-                  </div>
-                )
-            )}
-          </div>
-          <h2 className="years-sections-title">Secondo anno</h2>
-          <div className="contents-grid">
-            {secondYearGroupsArray.map(
-              (group, index) =>
-                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                  <div className="cards" key={index++}>
-                    <GroupsCards
-                      ranking={index}
-                      isSearch={searchInput !== ''}
-                      title={group.title}
-                      link={group.link}
-                      description={group.description}
-                      picture={group.pictureURL}
-                      members={group.members}
-                      code={group.code}
-                      mzcode={group.mzcode}
-                    />
-                  </div>
-                )
-            )}
-          </div>
-          <h2 className="years-sections-title">Terzo anno</h2>
-          <div className="contents-grid">
-            {thirdYearGroupsArray.map(
-              (group, index) =>
-                group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                  <div className="cards" key={index++}>
-                    <GroupsCards
-                      ranking={index}
-                      isSearch={searchInput !== ''}
-                      title={group.title}
-                      link={group.link}
-                      description={group.description}
-                      picture={group.pictureURL}
-                      members={group.members}
-                      code={group.code}
-                      mzcode={group.mzcode}
-                    />
-                  </div>
-                )
-            )}
-          </div>
+          {arrays.map((array, index) => (
+            <div key={index}>
+              <h2 className="years-sections-title">{sectionsTitle[index]}</h2>
+              <div className="contents-grid">
+                {array.map(
+                  (group, index) =>
+                    group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
+                      <div className="cards" key={index}>
+                        <GroupsCards
+                          ranking={index + 1}
+                          isSearch={searchInput !== ''}
+                          title={group.title}
+                          link={group.link}
+                          description={group.description}
+                          picture={group.pictureURL}
+                          members={group.members}
+                          code={group.code}
+                          mzcode={group.mzcode}
+                        />
+                      </div>
+                    )
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
