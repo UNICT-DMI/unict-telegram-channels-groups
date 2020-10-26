@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Channels } from './Channels/Channels';
 import { Groups } from './Groups/Groups';
+import { Bots } from './Bots/Bots';
 import './App.css';
 
 function App(): JSX.Element {
@@ -14,6 +15,9 @@ function App(): JSX.Element {
           </Route>
           <Route exact path="/groups">
             <Groups />
+          </Route>
+          <Route exact path="/bots">
+            <Bots />
           </Route>
           <Redirect to="/channels" />
         </Switch>
