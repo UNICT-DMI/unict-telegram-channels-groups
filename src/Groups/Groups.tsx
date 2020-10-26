@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
 import { GroupsCards } from '../Cards/GroupsCards';
 
-const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
+const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
 
 const first: string = 'PRIMO_ANNO';
 const second: string = 'SECONDO_ANNO';
@@ -44,7 +44,7 @@ export function Groups(): JSX.Element {
       };
 
       promises.push(
-        fetch(`${API}/mid.php?path=${encodeURIComponent(year + '/' + groupName)}.json`)
+        fetch(API + encodeURIComponent(year + '/' + groupName) + '.json')
           .then(res => res.json())
           .then(data => {
             const tmpLink: string = data.link;
