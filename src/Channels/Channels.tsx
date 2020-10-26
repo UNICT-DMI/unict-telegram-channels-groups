@@ -96,9 +96,9 @@ export function Channels(): JSX.Element {
           {channelsArray.map(
             (channel, index) =>
               channel.title.toLowerCase().includes(searchInput.toLowerCase()) && (
-                <div className="cards" key={index++}>
+                <div className="cards" key={index}>
                   <ChannelsCards
-                    ranking={index}
+                    ranking={index + 1}
                     isSearch={searchInput !== ''}
                     title={channel.title}
                     link={channel.link}
