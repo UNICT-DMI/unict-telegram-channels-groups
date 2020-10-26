@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { botsNames } from './botsNames';
 import { BotsCards } from '../Cards/BotsCards';
 
-const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/BOT/';
+const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
 
 interface BotEntry {
   link: string;
@@ -30,7 +30,7 @@ export function Bots(): JSX.Element {
       };
 
       promises.push(
-        fetch(API + encodeURIComponent(botName) + '.json')
+        fetch(API + 'BOT/' + encodeURIComponent(botName) + '.json')
           .then(res => res.json())
           .then(data => {
             newBotEntry.title = data.group_name;
@@ -49,7 +49,14 @@ export function Bots(): JSX.Element {
       getData(botName);
     }
 
+    function compare(a: BotEntry, b: BotEntry): number {
+      if (a.title < b.title) return -1;
+      else if (a.title > b.title) return 1;
+      return 0;
+    }
+
     Promise.all(promises).then(() => {
+      tmpArray.sort(compare);
       setBotsArray(tmpArray);
       setLoading(false);
     });
