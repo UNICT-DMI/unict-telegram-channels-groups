@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
 import GroupsCards from '../Cards/GroupsCards';
 
-export const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
+const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
 
 const first: string = 'PRIMO_ANNO';
 const second: string = 'SECONDO_ANNO';
