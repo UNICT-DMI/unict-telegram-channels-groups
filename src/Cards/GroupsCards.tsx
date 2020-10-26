@@ -13,20 +13,14 @@ interface Props {
   code: string;
 }
 
-function GroupsCards(props: Props): JSX.Element {
+export function GroupsCards(props: Props): JSX.Element {
   return (
     <ul className="all-cards-contents">
       <div className="images-and-rankings">
         <a href={props.link}>
-          <img
-            className="images"
-            src={props.picture}
-            alt={props.title + ' picture'}
-          />
+          <img className="images" src={props.picture} alt={props.title + ' picture'} />
         </a>
-        <h2 className="rankings">
-          {props.isSearch ? '' : props.ranking + '°'}
-        </h2>
+        <h2 className="rankings">{props.isSearch ? '' : props.ranking + '°'}</h2>
       </div>
       <a className="links" href={props.link}>
         <h1>{props.title}</h1>
@@ -35,14 +29,18 @@ function GroupsCards(props: Props): JSX.Element {
       <p className="members">Members: {props.members}</p>
       {props.mzcode !== '' ? (
         <div className="codes">
-          <p>Codice Teams A-L: <b className="code">{props.code}</b></p>
-          <p>Codice Teams M-Z: <b className="code">{props.mzcode}</b></p>
+          <p>
+            Codice Teams A-L: <b className="code">{props.code}</b>
+          </p>
+          <p>
+            Codice Teams M-Z: <b className="code">{props.mzcode}</b>
+          </p>
         </div>
       ) : (
-        <p className="codes">Codice Teams: <b className="code">{props.code}</b></p>
+        <p className="codes">
+          Codice Teams: <b className="code">{props.code}</b>
+        </p>
       )}
     </ul>
   );
 }
-
-export default GroupsCards;

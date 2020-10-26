@@ -28,5 +28,3 @@ export function ChannelsCards(props: Props): JSX.Element {
     </ul>
   );
 }
-
-export default ChannelsCards;

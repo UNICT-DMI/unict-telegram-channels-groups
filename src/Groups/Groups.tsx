@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
-import GroupsCards from '../Cards/GroupsCards';
+import { GroupsCards } from '../Cards/GroupsCards';
 
 const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { channelsNames } from './channelsNames';
-import ChannelsCards from '../Cards/ChannelsCards';
+import { ChannelsCards } from '../Cards/ChannelsCards';
 
 interface ChannelEntry {
   title: string;
