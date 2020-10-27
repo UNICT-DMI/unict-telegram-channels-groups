@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Menu } from './Menu/Menu';
 import { Channels } from './Channels/Channels';
 import { Groups } from './Groups/Groups';
 import { Bots } from './Bots/Bots';
@@ -8,6 +9,7 @@ import './App.css';
 function App(): JSX.Element {
   return (
     <div className="App">
+      <Menu />
       <HashRouter basename="/">
         <Switch>
           <Route exact path="/channels">
