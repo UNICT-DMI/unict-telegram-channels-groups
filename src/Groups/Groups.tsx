@@ -118,12 +118,7 @@ export function Groups(): JSX.Element {
 
   return (
     <div>
-      <div className="routing">
-        <h1 className="ranking-title">Classifica gruppi DMI UNICT</h1>
-        <Link to="/channels" className="link-to-channels">
-          Visualizza Canali UNICT
-        </Link>
-      </div>
+      <h1 className="ranking-title">Classifica gruppi DMI UNICT</h1>
       <input
         className="search-input-field"
         placeholder="Search..."

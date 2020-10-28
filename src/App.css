@@ -2,26 +2,6 @@ body {
   background-color: #212529;
 }
 
-.routing {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.link-to-channels {
-  position: absolute;
-  right: 3rem;
-  font-size: 1.5rem;
-  color: lightblue;
-}
-
-.link-to-groups {
-  position: absolute;
-  right: 3rem;
-  font-size: 1.5rem;
-  color: lightblue;
-}
-
 .ranking-title {
   text-align: center;
   color: white;
@@ -69,25 +49,6 @@ body {
   .contents-grid {
     display: grid;
     grid-template-columns: 50% 50%;
-  }
-
-  .routing {
-    display: block;
-    margin: auto;
-  }
-
-  .link-to-groups {
-    position: static;
-    display: block;
-    text-align: center;
-    margin: 1rem;
-  }
-
-  .link-to-channels {
-    position: static;
-    display: block;
-    text-align: center;
-    margin: 1rem;
   }
 }
 
