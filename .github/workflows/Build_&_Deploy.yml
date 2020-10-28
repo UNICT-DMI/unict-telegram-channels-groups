@@ -11,22 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set Node version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Install dependencies
+        run: npm install
+
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
           path: |
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Use Node $node_version
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-
-      - name: Install dependencies and Build
-        run: |
-          npm install
-          npm run build --if-present
 
       - name: Deploy
         run: |
