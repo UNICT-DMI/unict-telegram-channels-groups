@@ -12,13 +12,13 @@ export function Menu(): JSX.Element {
         </div>
       </Link>
 
-      <Link to="/groups">
+      <Link to="/groups" onClick={() => document.body.classList.remove('active')}>
         <div className="pie pie2">
           <h5 className="menu-groups">Groups</h5>
         </div>
       </Link>
 
-      <Link to="/bots">
+      <Link to="/bots" onClick={() => document.body.classList.remove('active')}>
         <div className="pie pie3">
           <h5 className="menu-bots">Bots</h5>
         </div>
