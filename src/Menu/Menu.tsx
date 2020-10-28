@@ -6,7 +6,7 @@ import './Menu.css';
 export function Menu(): JSX.Element {
   return (
     <div>
-      <Link to="/channels">
+      <Link to="/channels" onClick={() => document.body.classList.remove('active')}>
         <div className="pie pie1">
           <h5 className="menu-channels">Channels</h5>
         </div>
