@@ -9,8 +9,8 @@ import './App.css';
 function App(): JSX.Element {
   return (
     <div className="App">
-      <Menu />
       <HashRouter basename="/">
+        <Menu />
         <Switch>
           <Route exact path="/channels">
             <Channels />

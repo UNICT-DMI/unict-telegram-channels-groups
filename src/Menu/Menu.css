@@ -16,12 +16,36 @@
   right: 20%;
 }
 
+.menu-channels {
+  position: absolute;
+  bottom: 33%;
+  right: 3%;
+  color: white;
+  text-decoration: none;
+}
+
+.menu-groups {
+  position: absolute;
+  bottom: 14%;
+  right: 16%;
+  color: white;
+  text-decoration: none;
+}
+
+.menu-bots {
+  position: absolute;
+  bottom: 3%;
+  right: 38%;
+  color: white;
+  text-decoration: none;
+}
+
 .pie {
   position: fixed;
-  left: -25vmin;
-  top: -25vmin;
-  width: 50vmin;
-  height: 50vmin;
+  left: -26vmin;
+  top: -26vmin;
+  width: 52vmin;
+  height: 52vmin;
   background: #343a50;
   border-radius: 50%;
   box-shadow: 0 0 1rem #001020;
@@ -29,7 +53,7 @@
   transition: transform 500ms;
 }
 
-.pie1 { 
+.pie1 {
   clip-path: polygon(50% 50%, 100% 50%, 100% 75%);
 }
 
