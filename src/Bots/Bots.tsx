@@ -64,12 +64,7 @@ export function Bots(): JSX.Element {
 
   return (
     <div>
-      <div className="routing">
-        <h1 className="ranking-title">Classifica canali UNICT</h1>
-        <Link to="/groups" className="link-to-groups">
-          Visualizza Gruppi DMI UNICT
-        </Link>
-      </div>
+      <h1 className="ranking-title">UNICT Bots</h1>
       <input
         className="search-input-field"
         placeholder="Search..."
