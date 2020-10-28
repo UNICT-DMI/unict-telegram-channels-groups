@@ -61,4 +61,10 @@ body {
   .links {
     font-size: 3vw;
   }
+
+  .menu-channels,
+  .menu-groups,
+  .menu-bots {
+    font-size: 0.45rem;
+  }
 }
