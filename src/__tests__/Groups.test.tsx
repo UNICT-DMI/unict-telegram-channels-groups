@@ -2,8 +2,8 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
-import { API, Groups } from './Groups';
+import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from '../Groups/groupsNames';
+import { API, Groups } from '../Groups/Groups';
 import { BrowserRouter } from 'react-router-dom';
 
 /* Mock API */
