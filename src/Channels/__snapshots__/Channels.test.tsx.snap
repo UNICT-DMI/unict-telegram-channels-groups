@@ -3,21 +3,11 @@
 exports[`should take a snapshot 1`] = `
 <DocumentFragment>
   <div>
-    <div
-      class="routing"
+    <h1
+      class="ranking-title"
     >
-      <h1
-        class="ranking-title"
-      >
-        Classifica canali UNICT
-      </h1>
-      <a
-        class="link-to-groups"
-        href="/groups"
-      >
-        Visualizza Gruppi DMI UNICT
-      </a>
-    </div>
+      Classifica canali UNICT
+    </h1>
     <input
       class="search-input-field"
       placeholder="Search..."
