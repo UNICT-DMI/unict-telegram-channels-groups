@@ -1,10 +1,18 @@
+$body-background: #212529;
+$ranking-title: white;
+$search-input-field-text: white;
+$search-input-field-background: #343A40;
+$years-section-title: white;
+$credits: white;
+$credits-links: #ffe600;
+
 body {
-  background-color: #212529;
+  background-color: $body-background;
 }
 
 .ranking-title {
   text-align: center;
-  color: white;
+  color: $ranking-title;
 }
 
 .loading {
@@ -18,13 +26,13 @@ body {
   margin: auto;
   padding: 0.5rem;
   border: 0.1rem solid lightgreen;
-  color: white;
-  background-color: #343a40;
+  color: $search-input-field-text;
+  background-color: $search-input-field-background;
 }
 
 .years-sections-title {
   text-align: center;
-  color: white;
+  color: $years-section-title;
 }
 
 .contents-grid {
@@ -35,14 +43,14 @@ body {
 .credits {
   display: block;
   text-align: center;
-  color: white;
+  color: $credits;
   padding: 1rem;
-}
 
-.credits a {
-  display: block;
-  text-decoration: none;
-  color: yellow;
+  a {
+    display: block;
+    text-decoration: none;
+    color: $credits-links;
+  }
 }
 
 @media screen and (max-width: 1267px) {
