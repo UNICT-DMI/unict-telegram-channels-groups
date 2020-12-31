@@ -1,0 +1,5 @@
+@use "../App";
+
+.navbar-custom {
+  background-color: App.$search-input-field-background;
+}

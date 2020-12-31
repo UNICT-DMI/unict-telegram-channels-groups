@@ -1,32 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import menuIcon from '../images/menu.svg';
-import './Menu.css';
+import {Nav, Navbar} from "react-bootstrap";
+import './Menu.scss';
 
-export function Menu(): JSX.Element {
-  return (
-    <div>
-      <Link to="/channels" onClick={() => document.body.classList.remove('active')}>
-        <div className="pie pie1">
-          <h5 className="menu-channels">Channels</h5>
-        </div>
-      </Link>
+interface Props {
+   section: String;
+}
 
-      <Link to="/groups" onClick={() => document.body.classList.remove('active')}>
-        <div className="pie pie2">
-          <h5 className="menu-groups">Groups</h5>
-        </div>
-      </Link>
-
-      <Link to="/bots" onClick={() => document.body.classList.remove('active')}>
-        <div className="pie pie3">
-          <h5 className="menu-bots">Bots</h5>
-        </div>
-      </Link>
-
-      <div className="menu" onClick={() => document.body.classList.toggle('active')}>
-        <img className="menu-icon" src={menuIcon} alt="Menu Icon"></img>
-      </div>
-    </div>
-  );
+export function Menu(props: Props): JSX.Element {
+   return (
+      <Navbar className="navbar-dark navbar-custom" expand="lg" fixed="top">
+         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+         <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mx-auto" variant="pills" defaultActiveKey={"#/" + props.section}>
+               <Nav.Link className="nav-link" href="#/channels">Classifica Canali UNICT</Nav.Link>
+               <Nav.Link className="nav-link" href="#/groups">Gruppi DMI UNICT</Nav.Link>
+               <Nav.Link className="nav-link" href="#/bots">Bots UNICT</Nav.Link>
+            </Nav>
+         </Navbar.Collapse>
+      </Navbar>
+   );
 }

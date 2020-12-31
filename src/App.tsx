@@ -10,15 +10,17 @@ export default function App(): JSX.Element {
    return (
       <div className="App">
          <HashRouter basename="/">
-            <Menu/>
             <Switch>
                <Route exact path="/channels">
+                  <Menu section="channels"/>
                   <Channels/>
                </Route>
                <Route exact path="/groups">
+                  <Menu section="groups"/>
                   <Groups/>
                </Route>
                <Route exact path="/bots">
+                  <Menu section="bots"/>
                   <Bots/>
                </Route>
                <Redirect to="/channels"/>
