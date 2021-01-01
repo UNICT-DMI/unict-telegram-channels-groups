@@ -1,29 +1,31 @@
+@use '../colors';
+
 .cards {
   display: block;
   height: auto;
   padding: 2rem;
   margin: 2rem;
   border-radius: 2rem;
-  box-shadow: -1rem 1rem 1rem #001020;
-  background-color: #343a40;
+  box-shadow: -1rem 1rem 1rem colors.$cards-shadow;
+  background-color: colors.$cards-background;
   transition: 0.3s;
 }
 
 .cards:hover {
-  background-color: #343a50;
+  background-color: colors.$cards-hover;
   transform: translateY(-1rem);
 }
 
 .cards:nth-child(1):hover {
-  background-color: #808000;
+  background-color: colors.$first-place;
 }
 
 .cards:nth-child(2):hover {
-  background-color: #808080;
+  background-color: colors.$second-place;
 }
 
 .cards:nth-child(3):hover {
-  background-color: #663300;
+  background-color: colors.$third-place;
 }
 
 .all-cards-contents {
@@ -60,9 +62,9 @@
 }
 
 .codes {
-  color: #ff9800;
+  color: colors.$teams;
 }
 
 .code {
-  color: #ffab40;
+  color: colors.$teams-codes;
 }

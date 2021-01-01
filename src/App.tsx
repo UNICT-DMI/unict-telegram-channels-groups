@@ -1,6 +1,5 @@
 import React from 'react';
 import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
-import {Menu} from './Menu/Menu';
 import {Channels} from './Channels/Channels';
 import {Groups} from './Groups/Groups';
 import {Bots} from './Bots/Bots';
@@ -12,15 +11,12 @@ export default function App(): JSX.Element {
          <HashRouter basename="/">
             <Switch>
                <Route exact path="/channels">
-                  <Menu section="channels"/>
                   <Channels/>
                </Route>
                <Route exact path="/groups">
-                  <Menu section="groups"/>
                   <Groups/>
                </Route>
                <Route exact path="/bots">
-                  <Menu section="bots"/>
                   <Bots/>
                </Route>
                <Redirect to="/channels"/>

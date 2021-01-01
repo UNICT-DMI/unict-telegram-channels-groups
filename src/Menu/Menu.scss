@@ -1,5 +1,13 @@
-@use "../App";
+@use "../colors";
 
 .navbar-custom {
-  background-color: App.$search-input-field-background;
+  background-color: colors.$cards-background;
+}
+
+#navbar-link {
+  color: lightblue;
+}
+
+#navbar-link:hover {
+  color: colors.$credits-links;
 }

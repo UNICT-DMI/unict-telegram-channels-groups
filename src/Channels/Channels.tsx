@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {channelsNames} from './channelsNames';
 import {ChannelsCards} from '../Cards/ChannelsCards';
+import Menu from "../Menu/Menu";
 
 interface ChannelEntry {
    title: string;
@@ -78,10 +79,7 @@ export function Channels(): JSX.Element {
 
    return (
       <div>
-         <input
-            className="search-input-field"
-            placeholder="Search..."
-            onChange={input => setSearchInput(input.target.value)}/>
+         <Menu section="channels" setSearchInput={setSearchInput}/>
          {loading ? (
             <img src="loading.gif" className="loading" key="loading" alt="loading"/>
          ) : (

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames} from './groupsNames';
 import {GroupsCards} from '../Cards/GroupsCards';
+import Menu from "../Menu/Menu";
 
 export const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
 
@@ -117,10 +118,7 @@ export function Groups(): JSX.Element {
 
    return (
       <div>
-         <input
-            className="search-input-field"
-            placeholder="Search..."
-            onChange={input => setSearchInput(input.target.value)}/>
+         <Menu section="groups" setSearchInput={setSearchInput}/>
          {loading ? (
             <img src="loading.gif" className="loading" key="loading" alt="loading"/>
          ) : (

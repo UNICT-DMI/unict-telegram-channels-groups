@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {botsNames} from './botsNames';
 import {BotsCards} from '../Cards/BotsCards';
+import Menu from "../Menu/Menu";
 
 const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
 
@@ -63,10 +64,7 @@ export function Bots(): JSX.Element {
 
    return (
       <div>
-         <input
-            className="search-input-field"
-            placeholder="Search..."
-            onChange={input => setSearchInput(input.target.value)}/>
+         <Menu section="bots" setSearchInput={setSearchInput}/>
          {loading ? (
             <img src="loading.gif" className="loading" key="loading" alt="loading"/>
          ) : (

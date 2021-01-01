@@ -1,20 +1,13 @@
+@use "colors";
 @import "~bootstrap/scss/bootstrap";
 
-$body-background: #212529;
-$ranking-title: white;
-$search-input-field-text: white;
-$search-input-field-background: #343A40;
-$years-section-title: white;
-$credits: white;
-$credits-links: #ffe600;
-
 body {
-  background-color: $body-background;
+  background-color: colors.$body-background;
 }
 
 .ranking-title {
   text-align: center;
-  color: $ranking-title;
+  color: white;
 }
 
 .loading {
@@ -23,18 +16,9 @@ body {
   margin: 1rem auto;
 }
 
-.search-input-field {
-  display: block;
-  margin: auto;
-  padding: 0.5rem;
-  border: 0.1rem solid lightgreen;
-  color: $search-input-field-text;
-  background-color: $search-input-field-background;
-}
-
 .years-sections-title {
   text-align: center;
-  color: $years-section-title;
+  color: white;
 }
 
 .contents-grid {
@@ -45,13 +29,13 @@ body {
 .credits {
   display: block;
   text-align: center;
-  color: $credits;
+  color: white;
   padding: 1rem;
 
   a {
     display: block;
     text-decoration: none;
-    color: $credits-links;
+    color: colors.$credits-links;
   }
 }
 
@@ -70,11 +54,5 @@ body {
 
   .links {
     font-size: 3vw;
-  }
-
-  .menu-channels,
-  .menu-groups,
-  .menu-bots {
-    font-size: 0.45rem;
   }
 }
