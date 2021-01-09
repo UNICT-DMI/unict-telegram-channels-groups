@@ -32,6 +32,8 @@
         "import/extensions": "warn",
         "import/no-unresolved": "warn",
         "no-restricted-syntax": "warn",
+        "react/destructuring-assignment":"warn",
+        "react/require-default-props": "warn",
         "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }]
     }
 }
