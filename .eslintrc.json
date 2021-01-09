@@ -1,0 +1,37 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:prettier/recommended",
+        "prettier/react"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "ignorePatterns": ["node_modules/**", "public/**"],
+    "plugins": [
+        "react",
+        "@typescript-eslint",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": ["error"],
+        "no-use-before-define": "warn",
+        "linebreak-style": "warn",
+        "no-undef": "warn",
+        "import/extensions": "warn",
+        "import/no-unresolved": "warn",
+        "no-restricted-syntax": "warn",
+        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }]
+    }
+}
