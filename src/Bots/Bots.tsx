@@ -19,7 +19,7 @@ export default function Bots(): JSX.Element {
 
   useEffect(() => {
     const tmpArray: BotEntry[] = [];
-    const promises: Promise<any>[] = [];
+    const promises: Promise<void | Response>[] = [];
 
     function getData(botName: string): void {
       const newBotEntry: BotEntry = {

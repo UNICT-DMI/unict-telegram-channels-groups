@@ -3,7 +3,7 @@ import { Form, FormControl, Nav, Navbar } from 'react-bootstrap';
 import './Menu.scss';
 
 interface Props {
-  section: String;
+  section: string;
   setSearchInput: Function;
 }
 
