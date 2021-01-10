@@ -1,39 +1,37 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "airbnb",
-        "plugin:prettier/recommended",
-        "prettier/react"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "ignorePatterns": ["node_modules/**", "public/**"],
-    "plugins": [
-        "react",
-        "@typescript-eslint",
-        "prettier"
-    ],
-    "rules": {
-        "prettier/prettier": ["error"],
-        "no-use-before-define": "warn",
-        "linebreak-style": "warn",
-        "no-undef": "warn",
-        "import/extensions": "warn",
-        "import/no-unresolved": "warn",
-        "no-restricted-syntax": "warn",
-        "react/destructuring-assignment":"warn",
-        "react/require-default-props": "warn",
-        "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }]
-    }
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["node_modules/**"],
+  "overrides": [{ "files": ["src/**.ts?(x)"] }],
+  "extends": [
+    "airbnb",
+    "react-app",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "no-use-before-define": "off",
+    "no-undef": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "react/destructuring-assignment": "off",
+    "react/require-default-props": "warn",
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }]
+  }
 }
