@@ -4,7 +4,7 @@ import './Menu.scss';
 
 interface Props {
   section: string;
-  setSearchInput: Function;
+  setSearchInput: (input: string) => void;
 }
 
 export default function Menu(props: Props): JSX.Element {
