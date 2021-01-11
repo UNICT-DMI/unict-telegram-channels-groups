@@ -5,6 +5,7 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "jsx": true
     },
@@ -13,25 +14,41 @@
   },
   "ignorePatterns": ["node_modules/**"],
   "overrides": [{ "files": ["src/**.ts?(x)"] }],
+  "plugins": ["react", "@typescript-eslint", "prettier", "jsx-a11y", "promise"],
   "extends": [
     "airbnb",
     "react-app",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:promise/recommended",
     "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "prettier/@typescript-eslint",
     "prettier/react"
   ],
-  "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "prettier/prettier": ["error"],
     "no-use-before-define": "off",
     "no-undef": "off",
     "import/extensions": "off",
     "import/no-unresolved": "off",
-    "@typescript-eslint/no-inferrable-types": "off",
     "react/destructuring-assignment": "off",
     "react/require-default-props": "warn",
-    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-call": "warn",
+    "@typescript-eslint/no-unsafe-return": "warn",
+    "@typescript-eslint/restrict-template-expressions": "warn",
+    "promise/always-return": "off",
+    "promise/catch-or-return": "warn"
   }
 }
