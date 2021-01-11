@@ -95,15 +95,17 @@ export default function Groups(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises).then(() => {
-      firstYearGroupsTmpArray.sort(compare);
-      secondYearGroupsTmpArray.sort(compare);
-      thirdYearGroupsTmpArray.sort(compare);
-      setFirstYearGroupsArray(firstYearGroupsTmpArray);
-      setSecondYearGroupsArray(secondYearGroupsTmpArray);
-      setThirdYearGroupsArray(thirdYearGroupsTmpArray);
-      setLoading(false);
-    });
+    Promise.all(promises)
+      .then(() => {
+        firstYearGroupsTmpArray.sort(compare);
+        secondYearGroupsTmpArray.sort(compare);
+        thirdYearGroupsTmpArray.sort(compare);
+        setFirstYearGroupsArray(firstYearGroupsTmpArray);
+        setSecondYearGroupsArray(secondYearGroupsTmpArray);
+        setThirdYearGroupsArray(thirdYearGroupsTmpArray);
+        setLoading(false);
+      })
+      .catch(e => console.log(e));
   }, []);
 
   interface ArrayEntry {

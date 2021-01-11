@@ -55,11 +55,13 @@ export default function Bots(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises).then(() => {
-      tmpArray.sort(compare);
-      setBotsArray(tmpArray);
-      setLoading(false);
-    });
+    Promise.all(promises)
+      .then(() => {
+        tmpArray.sort(compare);
+        setBotsArray(tmpArray);
+        setLoading(false);
+      })
+      .catch(e => console.log(e));
   }, []);
 
   return (

@@ -70,15 +70,21 @@ export default function Channels(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises).then(() =>
-      Promise.all(promisesPictures).then(() =>
-        Promise.all(promisesSubscribers).then(() => {
-          sortedArray.sort(compare);
-          setChannelsArray(sortedArray);
-          setLoading(false);
-        })
+    Promise.all(promises)
+      .then(() =>
+        Promise.all(promisesPictures)
+          .then(() =>
+            Promise.all(promisesSubscribers)
+              .then(() => {
+                sortedArray.sort(compare);
+                setChannelsArray(sortedArray);
+                setLoading(false);
+              })
+              .catch(e => console.log(e))
+          )
+          .catch(e => console.log(e))
       )
-    );
+      .catch(e => console.log(e));
   }, []);
 
   return (
