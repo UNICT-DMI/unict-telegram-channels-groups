@@ -5,14 +5,12 @@ import Channels from '../Channels/Channels';
 
 afterEach(cleanup);
 
-test('should take a snapshot', () => {
+test('Channels snapshot', () => {
   const { asFragment }: RenderResult = render(
     <BrowserRouter>
       <Channels />
     </BrowserRouter>
   );
 
-  const firstRender = asFragment();
-
-  expect(firstRender).toMatchSnapshot();
+  expect(asFragment()).toMatchSnapshot();
 });

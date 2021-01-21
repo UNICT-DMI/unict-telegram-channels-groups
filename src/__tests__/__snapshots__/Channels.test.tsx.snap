@@ -1,17 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should take a snapshot 1`] = `
+exports[`Channels snapshot 1`] = `
 <DocumentFragment>
   <div>
-    <h1
-      class="ranking-title"
+    <nav
+      class="navbar-dark navbar-custom navbar navbar-expand-lg navbar-light fixed-top"
     >
-      Classifica canali UNICT
-    </h1>
-    <input
-      class="search-input-field"
-      placeholder="Search..."
-    />
+      <button
+        aria-controls="basic-navbar-nav"
+        aria-label="Toggle navigation"
+        class="navbar-toggler collapsed"
+        type="button"
+      >
+        <span
+          class="navbar-toggler-icon"
+        />
+      </button>
+      <div
+        class="navbar-collapse collapse"
+        id="basic-navbar-nav"
+      >
+        <div
+          class="mr-auto navbar-nav nav-pills"
+        >
+          <a
+            class="nav-link active"
+            data-rb-event-key="#/channels"
+            href="#/channels"
+            id="navbar-link"
+          >
+            Classifica Canali UNICT
+          </a>
+          <a
+            class="nav-link"
+            data-rb-event-key="#/groups"
+            href="#/groups"
+            id="navbar-link"
+          >
+            Gruppi DMI UNICT
+          </a>
+          <a
+            class="nav-link"
+            data-rb-event-key="#/bots"
+            href="#/bots"
+            id="navbar-link"
+          >
+            Bots UNICT
+          </a>
+        </div>
+        <form
+          class=""
+        >
+          <input
+            class="ml-auto form-control"
+            placeholder="Cerca"
+            type="text"
+          />
+        </form>
+      </div>
+    </nav>
     <img
       alt="loading"
       class="loading"
