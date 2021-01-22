@@ -1,4 +1,4 @@
-export const channelsNames: string[] = [
+const channelsNames: string[] = [
   'dminews',
   'fisicact',
   'dieeinews',
@@ -30,3 +30,4 @@ export const channelsNames: string[] = [
   'Spotted_DMI',
   'SfottedDIEEI',
 ];
+export default channelsNames;

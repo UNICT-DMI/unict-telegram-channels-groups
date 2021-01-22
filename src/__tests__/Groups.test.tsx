@@ -2,16 +2,21 @@ import React from 'react';
 import { render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from '../Groups/groupsNames';
-import { API, Groups } from '../Groups/Groups';
 import { BrowserRouter } from 'react-router-dom';
+import {
+  firstYearGroupsNames,
+  secondYearGroupsNames,
+  thirdYearGroupsNames,
+} from '../Groups/groupsNames';
+import { API } from '../Groups/Groups';
+import Groups from '../Groups/Groups';
 
 /* Mock API */
 const server = setupServer(
   ...[
     ...firstYearGroupsNames.map(group =>
       rest.get(
-        `${API}/mid.php?path=${encodeURIComponent('PRIMO_ANNO/' + group.title)}.json`,
+        `${API}/mid.php?path=${encodeURIComponent(`PRIMO_ANNO/${group.title}`)}.json`,
         (req, res, ctx) =>
           res(
             ctx.json({
@@ -25,7 +30,7 @@ const server = setupServer(
     ),
     ...secondYearGroupsNames.map(group =>
       rest.get(
-        `${API}/mid.php?path=${encodeURIComponent('SECONDO_ANNO/' + group.title)}.json`,
+        `${API}/mid.php?path=${encodeURIComponent(`SECONDO_ANNO/${group.title}`)}.json`,
         (req, res, ctx) =>
           res(
             ctx.json({
@@ -39,7 +44,7 @@ const server = setupServer(
     ),
     ...thirdYearGroupsNames.map(group =>
       rest.get(
-        `${API}/mid.php?path=${encodeURIComponent('TERZO_ANNO/' + group.title)}.json`,
+        `${API}/mid.php?path=${encodeURIComponent(`TERZO_ANNO/${group.title}`)}.json`,
         (req, res, ctx) =>
           res(
             ctx.json({
