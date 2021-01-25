@@ -56,7 +56,7 @@ export default function Groups(): JSX.Element {
             if (data.image_link === '') {
               newGroupEntry.pictureURL = 'telegram.svg';
             } else {
-              const tmpPic = data.image_link;
+              const tmpPic: string = data.image_link;
               newGroupEntry.pictureURL = tmpPic.substring(1);
             }
 
@@ -131,11 +131,11 @@ export default function Groups(): JSX.Element {
               <h2 className='years-sections-title'>{specificArray.sectionTitle}</h2>
               <div className='contents-grid'>
                 {specificArray.array.map(
-                  group =>
+                  (group, position) =>
                     group.title.toLowerCase().includes(searchInput.toLowerCase()) && (
                       <div className='cards' key={group.title}>
                         <GroupsCards
-                          ranking={index + 1}
+                          ranking={position + 1}
                           isSearch={searchInput !== ''}
                           title={group.title}
                           link={group.link}

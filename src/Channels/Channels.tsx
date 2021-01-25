@@ -41,10 +41,10 @@ export default function Channels(): JSX.Element {
             newChannelEntry.link = `https://t.me/${channelName}`;
             newChannelEntry.description = data.result.description ? data.result.description : '';
             promisesPictures.push(
-              fetch(`${API}file=${data.result.photo.big_file_id}`)
+              fetch(`${API}file=${data.result.photo.big_file_id as string}`)
                 .then(res => res.json())
                 .then(d => {
-                  newChannelEntry.pictureURL = `${API}path=${d.result.file_path}`;
+                  newChannelEntry.pictureURL = `${API}path=${d.result.file_path as string}`;
                 })
             );
           })

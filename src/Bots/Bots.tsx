@@ -33,11 +33,11 @@ export default function Bots(): JSX.Element {
         fetch(`${API}BOT/${encodeURIComponent(botName)}.json`)
           .then(res => res.json())
           .then(data => {
-            newBotEntry.title = data.group_name;
+            newBotEntry.title = data.group_name as string;
             const tmpLink: string = data.link;
             newBotEntry.link = tmpLink.substring(1, tmpLink.length - 1);
             newBotEntry.description = data.description;
-            const tmpPic = data.image_link;
+            const tmpPic: string = data.image_link;
             newBotEntry.pictureURL = tmpPic.substring(1);
 
             tmpArray.push(newBotEntry);
