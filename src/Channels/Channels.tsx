@@ -19,9 +19,9 @@ export default function Channels(): JSX.Element {
   const [searchInput, setSearchInput] = useState<string>('');
 
   useEffect(() => {
-    const promises: Promise<any>[] = [];
-    const promisesPictures: Promise<any>[] = [];
-    const promisesSubscribers: Promise<any>[] = [];
+    const promises: Promise<Response | void>[] = [];
+    const promisesPictures: Promise<Response | void>[] = [];
+    const promisesSubscribers: Promise<Response | number | void>[] = [];
     const sortedArray: ChannelEntry[] = [];
 
     function getData(channelName: string): void {

@@ -31,7 +31,7 @@ export default function Groups(): JSX.Element {
     const firstYearGroupsTmpArray: GroupEntry[] = [];
     const secondYearGroupsTmpArray: GroupEntry[] = [];
     const thirdYearGroupsTmpArray: GroupEntry[] = [];
-    const promises: Promise<any>[] = [];
+    const promises: Promise<Response | void>[] = [];
 
     function getData(year: string, groupName: string, code: string, mzcode: string): void {
       const newGroupEntry: GroupEntry = {
