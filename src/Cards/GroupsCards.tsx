@@ -9,7 +9,7 @@ interface Props {
   isSearch: boolean;
   ranking: number;
   members: number;
-  mzcode?: string;
+  mzcode: string;
   code: string;
 }
 
