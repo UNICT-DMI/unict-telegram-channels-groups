@@ -8,8 +8,7 @@ import {
   secondYearGroupsNames,
   thirdYearGroupsNames,
 } from '../Groups/groupsNames';
-import { API } from '../Groups/Groups';
-import Groups from '../Groups/Groups';
+import Groups, { API } from '../Groups/Groups';
 
 /* Mock API */
 const server = setupServer(
@@ -70,6 +69,8 @@ describe('Groups', () => {
         <Groups />
       </BrowserRouter>
     );
-    waitFor(() => getByText(/test/i));
+    waitFor(() => getByText(/test/i)).catch(e => {
+      console.log(e);
+    });
   });
 });
