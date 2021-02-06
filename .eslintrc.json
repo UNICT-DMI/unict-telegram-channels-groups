@@ -43,6 +43,6 @@
     "@typescript-eslint/no-unsafe-assignment": "off",
     "@typescript-eslint/no-unsafe-member-access": "off",
     "promise/always-return": "off",
-    "no-console":"off"
+    "no-console": "off"
   }
 }
