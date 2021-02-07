@@ -19,9 +19,8 @@ export default function Bots(): JSX.Element {
 
   useEffect(() => {
     const tmpArray: BotEntry[] = [];
-    const promises: Promise<void | Response>[] = [];
 
-    function getData(botName: string): void {
+    async function getData(botName: string): Promise<void> {
       const newBotEntry: BotEntry = {
         title: '',
         link: '',
@@ -29,25 +28,21 @@ export default function Bots(): JSX.Element {
         pictureURL: '',
       };
 
-      promises.push(
-        fetch(`${API}BOT/${encodeURIComponent(botName)}.json`)
-          .then(res => res.json())
-          .then(data => {
-            newBotEntry.title = data.group_name as string;
-            const tmpLink: string = data.link;
-            newBotEntry.link = tmpLink.substring(1, tmpLink.length - 1);
-            newBotEntry.description = data.description;
-            const tmpPic: string = data.image_link;
-            newBotEntry.pictureURL = tmpPic.substring(1);
+      const request = fetch(`${API}BOT/${botName}.json`)
+        .then(res => res.json())
+        .then(data => {
+          newBotEntry.title = data.group_name as string;
+          const tmpLink: string = data.link;
+          newBotEntry.link = tmpLink.substring(1, tmpLink.length - 1);
+          newBotEntry.description = data.description;
+          const tmpPic: string = data.image_link;
+          newBotEntry.pictureURL = tmpPic.substring(1);
+        });
 
-            tmpArray.push(newBotEntry);
-          })
-      );
+      await Promise.resolve(request).then(() => {
+        tmpArray.push(newBotEntry);
+      });
     }
-
-    botsNames.forEach(botName => {
-      getData(botName);
-    });
 
     function compare(a: BotEntry, b: BotEntry): number {
       if (a.title < b.title) return -1;
@@ -55,7 +50,17 @@ export default function Bots(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises)
+    async function initialize() {
+      const promises: Promise<void>[] = [];
+
+      botsNames.forEach(bot => {
+        promises.push(getData(bot));
+      });
+
+      return Promise.all(promises);
+    }
+
+    initialize()
       .then(() => {
         tmpArray.sort(compare);
         setBotsArray(tmpArray);
