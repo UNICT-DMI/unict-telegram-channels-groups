@@ -19,12 +19,9 @@ export default function Channels(): JSX.Element {
   const [searchInput, setSearchInput] = useState<string>('');
 
   useEffect(() => {
-    const promises: Promise<Response | void>[] = [];
-    const promisesPictures: Promise<Response | void>[] = [];
-    const promisesSubscribers: Promise<Response | number | void>[] = [];
-    const sortedArray: ChannelEntry[] = [];
+    const tmpArray: ChannelEntry[] = [];
 
-    function getData(channelName: string): void {
+    async function getData(channelName: string): Promise<void> {
       const newChannelEntry: ChannelEntry = {
         title: '',
         link: '',
@@ -33,36 +30,27 @@ export default function Channels(): JSX.Element {
         subscribers: 0,
       };
 
-      promises.push(
-        fetch(`${API}chat=${channelName}`)
-          .then(res => res.json())
-          .then(data => {
-            newChannelEntry.title = data.result.title;
-            newChannelEntry.link = `https://t.me/${channelName}`;
-            newChannelEntry.description = data.result.description ? data.result.description : '';
-            promisesPictures.push(
-              fetch(`${API}file=${data.result.photo.big_file_id as string}`)
-                .then(res => res.json())
-                .then(d => {
-                  newChannelEntry.pictureURL = `${API}path=${d.result.file_path as string}`;
-                })
-            );
-          })
-      );
+      const first = fetch(`${API}chat=${channelName}`)
+        .then(res => res.json())
+        .then(data => {
+          newChannelEntry.title = data.result.title;
+          newChannelEntry.link = `https://t.me/${channelName}`;
+          newChannelEntry.description = data.result.description ? data.result.description : '';
+          return fetch(`${API}file=${data.result.photo.big_file_id as string}`);
+        })
+        .then(res => res.json())
+        .then(d => {
+          newChannelEntry.pictureURL = `${API}path=${d.result.file_path as string}`;
+        });
 
-      promisesSubscribers.push(
-        fetch(`${API}count=${channelName}`)
-          .then(res => res.json())
-          .then(data => {
-            newChannelEntry.subscribers = data.result;
-          })
-          .then(() => sortedArray.push(newChannelEntry))
-      );
+      const second = fetch(`${API}count=${channelName}`)
+        .then(res => res.json())
+        .then(data => {
+          newChannelEntry.subscribers = data.result;
+        });
+
+      await Promise.all([first, second]).then(() => tmpArray.push(newChannelEntry));
     }
-
-    channelsNames.forEach(channel => {
-      getData(channel);
-    });
 
     function compare(a: ChannelEntry, b: ChannelEntry): number {
       if (a.subscribers < b.subscribers) return 1;
@@ -70,21 +58,23 @@ export default function Channels(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises)
-      .then(() =>
-        Promise.all(promisesPictures)
-          .then(() =>
-            Promise.all(promisesSubscribers)
-              .then(() => {
-                sortedArray.sort(compare);
-                setChannelsArray(sortedArray);
-                setLoading(false);
-              })
-              .catch(e => console.log(e))
-          )
-          .catch(e => console.log(e))
-      )
-      .catch(e => console.log(e));
+    async function initialize() {
+      const promises: Promise<void>[] = [];
+
+      channelsNames.forEach(channel => {
+        promises.push(getData(channel));
+      });
+
+      return Promise.all(promises);
+    }
+
+    initialize()
+      .then(() => {
+        tmpArray.sort(compare);
+        setChannelsArray(tmpArray);
+        setLoading(false);
+      })
+      .catch(err => console.log(err));
   }, []);
 
   return (

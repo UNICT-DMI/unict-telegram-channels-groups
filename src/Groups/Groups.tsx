@@ -6,9 +6,9 @@ import Menu from '../Menu/Menu';
 export const API: string =
   'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
 
-const first: string = 'PRIMO_ANNO';
-const second: string = 'SECONDO_ANNO';
-const third: string = 'TERZO_ANNO';
+const FIRST: string = 'PRIMO_ANNO';
+const SECOND: string = 'SECONDO_ANNO';
+const THIRD: string = 'TERZO_ANNO';
 
 interface GroupEntry {
   title: string;
@@ -31,9 +31,13 @@ export default function Groups(): JSX.Element {
     const firstYearGroupsTmpArray: GroupEntry[] = [];
     const secondYearGroupsTmpArray: GroupEntry[] = [];
     const thirdYearGroupsTmpArray: GroupEntry[] = [];
-    const promises: Promise<Response | void>[] = [];
 
-    function getData(year: string, groupName: string, code: string, mzcode: string): void {
+    async function getData(
+      year: string,
+      groupName: string,
+      code: string,
+      mzcode: string
+    ): Promise<void> {
       const newGroupEntry: GroupEntry = {
         title: '',
         link: '',
@@ -44,50 +48,37 @@ export default function Groups(): JSX.Element {
         mzcode: '',
       };
 
-      promises.push(
-        fetch(`${API + encodeURIComponent(`${year}/${groupName}`)}.json`)
-          .then(res => res.json())
-          .then(data => {
-            const tmpLink: string = data.link;
-            newGroupEntry.title = groupName;
-            newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
-            newGroupEntry.description = data.description;
+      const request = fetch(`${API}${year}/${groupName}.json`)
+        .then(res => res.json())
+        .then(data => {
+          const tmpLink: string = data.link;
+          newGroupEntry.title = groupName;
+          newGroupEntry.link = tmpLink.substring(1, tmpLink.length - 1);
+          newGroupEntry.description = data.description;
 
-            if (data.image_link === '') {
-              newGroupEntry.pictureURL = 'telegram.svg';
-            } else {
-              const tmpPic: string = data.image_link;
-              newGroupEntry.pictureURL = tmpPic.substring(1);
-            }
+          if (data.image_link === '') {
+            newGroupEntry.pictureURL = 'telegram.svg';
+          } else {
+            const tmpPic: string = data.image_link;
+            newGroupEntry.pictureURL = tmpPic.substring(1);
+          }
 
-            const tmpMembers: string[] = (data.members_number as string).split(' ');
-            newGroupEntry.members = parseInt(tmpMembers[0], 10);
-            newGroupEntry.code = code;
-            newGroupEntry.mzcode = mzcode;
-          })
-          .then(() => {
-            if (year === first) {
-              firstYearGroupsTmpArray.push(newGroupEntry);
-            } else if (year === second) {
-              secondYearGroupsTmpArray.push(newGroupEntry);
-            } else {
-              thirdYearGroupsTmpArray.push(newGroupEntry);
-            }
-          })
-      );
+          const tmpMembers: string[] = (data.members_number as string).split(' ');
+          newGroupEntry.members = parseInt(tmpMembers[0], 10);
+          newGroupEntry.code = code;
+          newGroupEntry.mzcode = mzcode;
+        });
+
+      await Promise.resolve(request).then(() => {
+        if (year === FIRST) {
+          firstYearGroupsTmpArray.push(newGroupEntry);
+        } else if (year === SECOND) {
+          secondYearGroupsTmpArray.push(newGroupEntry);
+        } else {
+          thirdYearGroupsTmpArray.push(newGroupEntry);
+        }
+      });
     }
-
-    firstYearGroupsNames.forEach(group => {
-      getData(first, group.title, group.code, group.mzcode);
-    });
-
-    secondYearGroupsNames.forEach(group => {
-      getData(second, group.title, group.code, group.mzcode);
-    });
-
-    thirdYearGroupsNames.forEach(group => {
-      getData(third, group.title, group.code, '');
-    });
 
     function compare(a: GroupEntry, b: GroupEntry): number {
       if (a.members < b.members) return 1;
@@ -95,7 +86,23 @@ export default function Groups(): JSX.Element {
       return 0;
     }
 
-    Promise.all(promises)
+    async function initialize() {
+      const promises: Promise<void>[] = [];
+
+      firstYearGroupsNames.forEach(group => {
+        promises.push(getData(FIRST, group.title, group.code, group.mzcode));
+      });
+      secondYearGroupsNames.forEach(group => {
+        promises.push(getData(SECOND, group.title, group.code, group.mzcode));
+      });
+      thirdYearGroupsNames.forEach(group => {
+        promises.push(getData(THIRD, group.title, group.code, ''));
+      });
+
+      return Promise.all(promises);
+    }
+
+    initialize()
       .then(() => {
         firstYearGroupsTmpArray.sort(compare);
         secondYearGroupsTmpArray.sort(compare);
@@ -105,7 +112,7 @@ export default function Groups(): JSX.Element {
         setThirdYearGroupsArray(thirdYearGroupsTmpArray);
         setLoading(false);
       })
-      .catch(e => console.log(e));
+      .catch(err => console.log(err));
   }, []);
 
   interface ArrayEntry {
