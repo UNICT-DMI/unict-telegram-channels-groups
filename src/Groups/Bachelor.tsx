@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { firstYearGroupsNames, secondYearGroupsNames, thirdYearGroupsNames } from './groupsNames';
+import {
+  firstYearGroupsNames,
+  secondYearGroupsNames,
+  thirdYearGroupsNames,
+} from './BachelorGroups';
 import GroupsCards from '../Cards/GroupsCards';
 import Menu from '../Menu/Menu';
 
@@ -20,7 +24,7 @@ interface GroupEntry {
   mzcode: string;
 }
 
-export default function Groups(): JSX.Element {
+export default function Bachelor(): JSX.Element {
   const [firstYearGroupsArray, setFirstYearGroupsArray] = useState<GroupEntry[]>([]);
   const [secondYearGroupsArray, setSecondYearGroupsArray] = useState<GroupEntry[]>([]);
   const [thirdYearGroupsArray, setThirdYearGroupsArray] = useState<GroupEntry[]>([]);

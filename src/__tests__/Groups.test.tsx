@@ -7,8 +7,8 @@ import {
   firstYearGroupsNames,
   secondYearGroupsNames,
   thirdYearGroupsNames,
-} from '../Groups/groupsNames';
-import Groups, { API } from '../Groups/Groups';
+} from '../Groups/Bachelor';
+import Groups, { API } from '../Groups/Bachelor';
 
 /* Mock API */
 const server = setupServer(
