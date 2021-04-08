@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "predeploy": "npm run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --coverage --watchAll=false",
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "yarn": "^1.22.10",
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.25",
