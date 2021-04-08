@@ -137,7 +137,7 @@ export default function Bachelor(): JSX.Element {
         <img src='loading.gif' className='loading' key='loading' alt='loading' />
       ) : (
         <div>
-          {arrays.map((specificArray, index) => (
+          {arrays.map(specificArray => (
             <div key={specificArray.sectionTitle}>
               <h2 className='years-sections-title'>{specificArray.sectionTitle}</h2>
               <div className='contents-grid'>
