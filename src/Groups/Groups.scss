@@ -1,0 +1,30 @@
+@use "/src/colors";
+
+.groups {
+  text-align: center;
+  font-size: xx-large;
+  padding-top: 30vh;
+  padding-bottom: 30vh;
+
+  .bachelor {
+    display: inline-block;
+    width: 50%;
+    text-decoration: none;
+    color: lightblue;
+  }
+
+  .bachelor:hover {
+    color: colors.$credits-links;
+  }
+
+  .master {
+    display: inline-block;
+    width: 50%;
+    text-decoration: none;
+    color: lightblue;
+  }
+
+  .master:hover {
+    color: colors.$credits-links;
+  }
+}
