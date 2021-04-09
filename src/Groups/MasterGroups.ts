@@ -17,7 +17,7 @@ export const firstYearGroupsNames: Subject[] = [
   { title: 'Computazione naturale', code: '0w88ij6' },
   { title: 'Computer Security', code: 'x43kd4z' },
   { title: 'Computer Vision', code: 'sf90883' },
-  { title: 'Fondamenti e linguaggi per la programmazione distribuita', code: '8ea329g' },
+  { title: 'Fondamenti e linguaggi programmazione distribuita', code: '8ea329g' },
   { title: 'Machine Learning', code: 'j8rls3j' },
   { title: 'Programmazione di sistemi robotici autonomi', code: 'ipwouav' },
 ];
@@ -29,8 +29,8 @@ export const secondYearGroupsNames: Subject[] = [
   { title: 'Intelligenza artificiale', code: '9i6ixq5' },
   { title: 'Linguaggi Formali', code: '28xafrz' },
   { title: 'Peer to peer and wireless networks', code: 'cdt2hgq' },
-  { title: 'Sistemi Cloud', code: 'ru8x5mv' },
-  { title: 'Web reasoning', code: 'zso2z7h' },
+  { title: 'Sistemi Cloud e IOT 20-21', code: 'ru8x5mv' },
+  { title: 'Web Reasoning', code: 'zso2z7h' },
   { title: 'Ulteriori conoscenze linguistiche (lingua Inglese)', code: '' },
   { title: 'Tecnologie per i servizi web', code: '' },
 ];
