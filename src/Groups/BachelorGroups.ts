@@ -65,10 +65,10 @@ export const thirdYearGroupsNames: Subject[] = [
   { title: 'SOCIAL MEDIA MANAGEMENT', code: 'e4mbxsj' },
   { title: 'STARTUP DI IMPRESA E MODELLI DI BUSINESS', code: 'jdy4mk5' },
   { title: 'SVILUPPO DI GIOCHI DIGITALI', code: 'x7fuqlt' },
-  { title: 'TECHNOLOGIES FOR ADVANCED PROGRAMMING', code: 'cwecmqh' },
+  { title: 'tap', code: 'cwecmqh' },
   {
     title: 'TECNOLOGIE PER I SISTEMI DISTRIBUITI E IL WEB CON LABORATORIO',
     code: 'bfei9jj',
   },
-  { title: 'Web Development 2020', code: 'j0bqg8n' },
+  { title: 'Web Development 2021', code: 'j0bqg8n' },
 ];
