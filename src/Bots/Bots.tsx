@@ -3,7 +3,8 @@ import botsNames from './botsNames';
 import BotsCards from '../Cards/BotsCards';
 import Menu from '../Menu/Menu';
 
-const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
+const API: string =
+  'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=GRUPPI/BOT/';
 
 interface BotEntry {
   link: string;
@@ -28,7 +29,7 @@ export default function Bots(): JSX.Element {
         pictureURL: '',
       };
 
-      const request = fetch(`${API}BOT/${botName}.json`)
+      const request = fetch(`${API}${botName}.json`)
         .then(res => res.json())
         .then(data => {
           newBotEntry.title = data.group_name as string;
@@ -53,7 +54,7 @@ export default function Bots(): JSX.Element {
     async function initialize() {
       const promises: Promise<void>[] = [];
 
-      botsNames.forEach(bot => {
+      (await botsNames()).forEach(bot => {
         promises.push(getData(bot));
       });
 

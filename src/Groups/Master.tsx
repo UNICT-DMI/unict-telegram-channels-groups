@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { firstYearGroupsNames, secondYearGroupsNames } from './MasterGroups';
+import { FIRST_YEAR_MASTER, SECOND_YEAR_MASTER, groupsNames } from './MasterGroups';
 import GroupsCards from '../Cards/GroupsCards';
 import Menu from '../Menu/Menu';
 
-export const API: string =
-  'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
-
-const FIRST: string = 'PRIMO_ANNO_MAGISTRALE';
-const SECOND: string = 'SECONDO_ANNO_MAGISTRALE';
+const API: string =
+  'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=GRUPPI/';
 
 interface GroupEntry {
   title: string;
@@ -28,7 +25,7 @@ export default function Master(): JSX.Element {
     const firstYearGroupsTmpArray: GroupEntry[] = [];
     const secondYearGroupsTmpArray: GroupEntry[] = [];
 
-    async function getData(year: string, groupName: string, code: string): Promise<void> {
+    async function getData(year: string, groupName: string): Promise<void> {
       const newGroupEntry: GroupEntry = {
         title: '',
         link: '',
@@ -55,11 +52,11 @@ export default function Master(): JSX.Element {
 
           const tmpMembers: string[] = (data.members_number as string).split(' ');
           newGroupEntry.members = parseInt(tmpMembers[0], 10);
-          newGroupEntry.code = code;
+          newGroupEntry.code = data.code;
         });
 
       await Promise.resolve(request).then(() => {
-        if (year === FIRST) {
+        if (year === FIRST_YEAR_MASTER) {
           firstYearGroupsTmpArray.push(newGroupEntry);
         } else {
           secondYearGroupsTmpArray.push(newGroupEntry);
@@ -76,11 +73,11 @@ export default function Master(): JSX.Element {
     async function initialize() {
       const promises: Promise<void>[] = [];
 
-      firstYearGroupsNames.forEach(group => {
-        promises.push(getData(FIRST, group.title, group.code));
+      (await groupsNames(FIRST_YEAR_MASTER)).forEach(group => {
+        promises.push(getData(FIRST_YEAR_MASTER, group));
       });
-      secondYearGroupsNames.forEach(group => {
-        promises.push(getData(SECOND, group.title, group.code));
+      (await groupsNames(SECOND_YEAR_MASTER)).forEach(group => {
+        promises.push(getData(SECOND_YEAR_MASTER, group));
       });
 
       return Promise.all(promises);
