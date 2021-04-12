@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {
-  firstYearGroupsNames,
-  secondYearGroupsNames,
-  thirdYearGroupsNames,
-} from './BachelorGroups';
+import { FIRST_YEAR, SECOND_YEAR, THIRD_YEAR, groupsNames } from './BachelorGroups';
 import GroupsCards from '../Cards/GroupsCards';
 import Menu from '../Menu/Menu';
 
-export const API: string =
-  'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=';
-
-const FIRST: string = 'PRIMO_ANNO';
-const SECOND: string = 'SECONDO_ANNO';
-const THIRD: string = 'TERZO_ANNO';
+const API: string =
+  'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=GRUPPI/';
 
 interface GroupEntry {
   title: string;
@@ -36,12 +28,7 @@ export default function Bachelor(): JSX.Element {
     const secondYearGroupsTmpArray: GroupEntry[] = [];
     const thirdYearGroupsTmpArray: GroupEntry[] = [];
 
-    async function getData(
-      year: string,
-      groupName: string,
-      code: string,
-      mzcode: string
-    ): Promise<void> {
+    async function getData(year: string, groupName: string): Promise<void> {
       const newGroupEntry: GroupEntry = {
         title: '',
         link: '',
@@ -69,14 +56,14 @@ export default function Bachelor(): JSX.Element {
 
           const tmpMembers: string[] = (data.members_number as string).split(' ');
           newGroupEntry.members = parseInt(tmpMembers[0], 10);
-          newGroupEntry.code = code;
-          newGroupEntry.mzcode = mzcode;
+          newGroupEntry.code = data.code;
+          newGroupEntry.mzcode = data.mzcode;
         });
 
       await Promise.resolve(request).then(() => {
-        if (year === FIRST) {
+        if (year === FIRST_YEAR) {
           firstYearGroupsTmpArray.push(newGroupEntry);
-        } else if (year === SECOND) {
+        } else if (year === SECOND_YEAR) {
           secondYearGroupsTmpArray.push(newGroupEntry);
         } else {
           thirdYearGroupsTmpArray.push(newGroupEntry);
@@ -93,14 +80,14 @@ export default function Bachelor(): JSX.Element {
     async function initialize() {
       const promises: Promise<void>[] = [];
 
-      firstYearGroupsNames.forEach(group => {
-        promises.push(getData(FIRST, group.title, group.code, group.mzcode));
+      (await groupsNames(FIRST_YEAR)).forEach(group => {
+        promises.push(getData(FIRST_YEAR, group));
       });
-      secondYearGroupsNames.forEach(group => {
-        promises.push(getData(SECOND, group.title, group.code, group.mzcode));
+      (await groupsNames(SECOND_YEAR)).forEach(group => {
+        promises.push(getData(SECOND_YEAR, group));
       });
-      thirdYearGroupsNames.forEach(group => {
-        promises.push(getData(THIRD, group.title, group.code, ''));
+      (await groupsNames(THIRD_YEAR)).forEach(group => {
+        promises.push(getData(THIRD_YEAR, group));
       });
 
       return Promise.all(promises);
