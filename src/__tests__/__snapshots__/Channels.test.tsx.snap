@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Channels snapshot 1`] = `
+exports[`Testing Channels Snapshot of Channels 1`] = `
 <DocumentFragment>
   <div>
     <nav
