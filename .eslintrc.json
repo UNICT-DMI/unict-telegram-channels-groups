@@ -17,21 +17,17 @@
   "plugins": ["react", "@typescript-eslint", "prettier", "jsx-a11y", "promise"],
   "extends": [
     "airbnb",
-    "react-app",
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:promise/recommended",
-    "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "plugin:jsx-a11y/recommended",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react"
+    "plugin:jsx-a11y/recommended"
   ],
   "rules": {
     "prettier/prettier": ["error"],
