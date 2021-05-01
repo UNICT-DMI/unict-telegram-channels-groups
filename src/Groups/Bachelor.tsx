@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { API } from './Groups';
 import { FIRST_YEAR, SECOND_YEAR, THIRD_YEAR, groupsNames } from './BachelorGroups';
 import GroupsCards from '../Cards/GroupsCards';
 import Menu from '../Menu/Menu';
-
-const API: string =
-  'https://seminaraluigi.altervista.org/list-telegram-groups/mid.php?path=GRUPPI/';
 
 interface GroupEntry {
   title: string;

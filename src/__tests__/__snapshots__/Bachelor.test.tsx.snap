@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Testing Channels Snapshot of Channels 1`] = `
+exports[`Testing Bachelor groups Snapshot of Bachelor groups 1`] = `
 <DocumentFragment>
   <div>
     <nav
@@ -24,7 +24,7 @@ exports[`Testing Channels Snapshot of Channels 1`] = `
           class="mr-auto navbar-nav nav-pills"
         >
           <a
-            class="nav-link active"
+            class="nav-link"
             data-rb-event-key="#/channels"
             href="#/channels"
             id="navbar-link"
@@ -32,7 +32,7 @@ exports[`Testing Channels Snapshot of Channels 1`] = `
             Classifica Canali UNICT
           </a>
           <a
-            class="nav-link"
+            class="nav-link active"
             data-rb-event-key="#/groups"
             href="#/groups"
             id="navbar-link"

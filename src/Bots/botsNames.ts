@@ -4,9 +4,7 @@ const API: string =
 export default async function botsNames(): Promise<string[]> {
   return fetch(`${API}.json`)
     .then(res => res.json())
-    .then(data => {
-      return data.names as string[];
-    })
+    .then(data => data.names as string[])
     .catch(err => {
       console.error(err);
       return [];
