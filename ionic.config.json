@@ -1,0 +1,7 @@
+{
+  "name": "UNICT-Telegram-Channels-Groups",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

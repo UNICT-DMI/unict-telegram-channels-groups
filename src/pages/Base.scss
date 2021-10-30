@@ -1,0 +1,14 @@
+.credits {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 1rem;
+
+  a {
+    text-decoration: none;
+    color: yellow;
+  }
+}

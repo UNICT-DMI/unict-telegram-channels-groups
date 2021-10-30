@@ -1,4 +1,4 @@
-@use "../colors";
+@use '../theme/colors';
 
 .navbar-custom {
   background-color: colors.$cards-background;
@@ -9,5 +9,5 @@
 }
 
 #navbar-link:hover {
-  color: colors.$credits-links;
+  color: yellow;
 }
