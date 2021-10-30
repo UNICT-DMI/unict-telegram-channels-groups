@@ -23,3 +23,17 @@
   display: grid;
   grid-template-columns: 33% 33% 34%;
 }
+
+@media screen and (max-width: 1267px) {
+  .contents-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media screen and (max-width: 634px) {
+  .contents-grid {
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}

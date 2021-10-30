@@ -2,14 +2,14 @@ import { IonContent, IonPage } from '@ionic/react';
 import { useState } from 'react';
 
 import TopNavbar from './TopNavbar';
-
-import './Base.scss';
 import Channels from './Channels/Channels';
 import Groups from './Groups/Groups';
 import Bachelor from './Groups/Bachelor';
 import Master from './Groups/Master';
 import Bots from './Bots/Bots';
 import Home from './Home/Home';
+
+import './Base.scss';
 
 interface BaseProps {
   page: string;
