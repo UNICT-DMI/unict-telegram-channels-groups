@@ -1,13 +1,26 @@
-@use '../theme/colors';
+@use '../theme/colors.scss';
 
-.navbar-custom {
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 3vh;
   background-color: colors.$cards-background;
-}
 
-#navbar-link {
-  color: lightblue;
-}
+  .links {
+    * {
+      margin-right: 2rem;
+      text-decoration: none;
+      color: colors.$texts;
+    }
+  }
 
-#navbar-link:hover {
-  color: yellow;
+  label {
+    color: colors.$texts;
+  }
+
+  input {
+    background-color: colors.$cards-background;
+    outline: none;
+    color: colors.$texts;
+  }
 }

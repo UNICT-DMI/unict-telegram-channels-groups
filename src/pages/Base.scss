@@ -12,3 +12,14 @@
     color: yellow;
   }
 }
+
+.loading {
+  display: block;
+  margin: auto;
+  width: 20vw;
+}
+
+.contents-grid {
+  display: grid;
+  grid-template-columns: 33% 33% 34%;
+}

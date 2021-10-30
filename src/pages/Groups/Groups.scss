@@ -1,0 +1,20 @@
+@use '../../theme/colors.scss';
+
+.grid {
+  --ion-grid-width: 50vw;
+  margin-top: 30vh;
+  margin-bottom: 30vh;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.card {
+  --background: var(--cards-background);
+}
+
+.card-title {
+  text-align: center;
+  color: colors.$texts;
+}
