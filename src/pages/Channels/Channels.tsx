@@ -31,20 +31,24 @@ const Channels: React.FC<ChannelProps> = (props: ChannelProps) => {
       subscribers: 0,
     };
 
-    const first = fetch(`${props.API}chat=${channelName}`)
+    const first = fetch(`${props.API}api.telegram.php?chat=${channelName}`)
       .then((res) => res.json())
       .then((data) => {
         newChannelEntry.title = data.result.title;
         newChannelEntry.link = `https://t.me/${channelName}`;
         newChannelEntry.description = data.result.description ? data.result.description : '';
-        return fetch(`${props.API}file=${data.result.photo.big_file_id as string}`);
+        return fetch(
+          `${props.API}api.telegram.php?file=${data.result.photo.big_file_id as string}`
+        );
       })
       .then((res) => res.json())
       .then((d) => {
-        newChannelEntry.pictureURL = `${props.API}path=${d.result.file_path as string}`;
+        newChannelEntry.pictureURL = `${props.API}api.telegram.php?path=${
+          d.result.file_path as string
+        }`;
       });
 
-    const second = fetch(`${props.API}count=${channelName}`)
+    const second = fetch(`${props.API}api.telegram.php?count=${channelName}`)
       .then((res) => res.json())
       .then((data) => {
         newChannelEntry.subscribers = data.result;

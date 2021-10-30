@@ -18,7 +18,7 @@ interface BaseProps {
 const Base: React.FC<BaseProps> = (props: BaseProps) => {
   const [searchInput, setSearchInput] = useState<string>('');
 
-  const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/api.telegram.php?';
+  const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/';
 
   return (
     <IonPage>
@@ -31,11 +31,11 @@ const Base: React.FC<BaseProps> = (props: BaseProps) => {
         ) : props.page === 'groups' ? (
           <Groups />
         ) : props.page === 'bachelor' ? (
-          <Bachelor />
+          <Bachelor API={API} searchInput={searchInput} />
         ) : props.page === 'master' ? (
-          <Master />
+          <Master API={API} searchInput={searchInput} />
         ) : props.page === 'bots' ? (
-          <Bots />
+          <Bots API={API} searchInput={searchInput} />
         ) : (
           <Home />
         )}

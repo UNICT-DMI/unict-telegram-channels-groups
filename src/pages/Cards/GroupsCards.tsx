@@ -1,16 +1,18 @@
 import './Cards.scss';
 
-interface ChannelsProps {
+interface GroupsProps {
   link: string;
   title: string;
   description: string;
   picture: string;
   isSearch: boolean;
   ranking: number;
-  subscribers: number;
+  members: number;
+  mzcode: string;
+  code: string;
 }
 
-const ChannelsCards: React.FC<ChannelsProps> = (props: ChannelsProps) => {
+const GroupsCards: React.FC<GroupsProps> = (props: GroupsProps) => {
   return (
     <div className='cards' key={props.title}>
       <ul className='all-cards-contents'>
@@ -24,10 +26,24 @@ const ChannelsCards: React.FC<ChannelsProps> = (props: ChannelsProps) => {
           <h1>{props.title}</h1>
         </a>
         <p className='descriptions'>{props.description}</p>
-        <p className='subscribers'>Subscribers: {props.subscribers}</p>
+        <p className='members'>Members: {props.members}</p>
+        {props.mzcode !== '' ? (
+          <div className='codes'>
+            <p>
+              Codice Teams A-L: <b className='code'>{props.code}</b>
+            </p>
+            <p>
+              Codice Teams M-Z: <b className='code'>{props.mzcode}</b>
+            </p>
+          </div>
+        ) : (
+          <p className='codes'>
+            Codice Teams: <b className='code'>{props.code}</b>
+          </p>
+        )}
       </ul>
     </div>
   );
 };
 
-export default ChannelsCards;
+export default GroupsCards;
