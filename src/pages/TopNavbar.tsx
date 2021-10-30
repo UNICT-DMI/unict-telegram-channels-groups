@@ -1,12 +1,12 @@
 import { Form, FormControl, Nav, Navbar } from 'react-bootstrap';
 import './TopNavbar.scss';
 
-interface Props {
+interface TopNavbarProps {
   page: string;
   setSearchInput: (input: string) => void;
 }
 
-export default function TopNavbar(props: Props): JSX.Element {
+const TopNavbar: React.FC<TopNavbarProps> = (props: TopNavbarProps) => {
   return (
     <Navbar className='navbar-dark navbar-custom' expand='lg' fixed='top'>
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -33,4 +33,6 @@ export default function TopNavbar(props: Props): JSX.Element {
       </Navbar.Collapse>
     </Navbar>
   );
-}
+};
+
+export default TopNavbar;
