@@ -28,19 +28,19 @@ const GroupsCards: React.FC<GroupsProps> = (props: GroupsProps) => {
         <p className='descriptions'>{props.description}</p>
         <p className='members'>Members: {props.members}</p>
         {props.mzcode !== '' ? (
-          <div className='codes'>
-            <p>
+          <div>
+            <p className='team'>
               Codice Teams A-L: <b className='code'>{props.code}</b>
             </p>
-            <p>
+            <p className='team'>
               Codice Teams M-Z: <b className='code'>{props.mzcode}</b>
             </p>
           </div>
-        ) : (
-          <p className='codes'>
+        ) : props.code !== '' ? (
+          <p className='team'>
             Codice Teams: <b className='code'>{props.code}</b>
           </p>
-        )}
+        ) : null}
       </ul>
     </div>
   );
