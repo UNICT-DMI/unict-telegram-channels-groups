@@ -20,30 +20,39 @@ const Base: React.FC<BaseProps> = (props: BaseProps) => {
 
   const API: string = 'https://seminaraluigi.altervista.org/list-telegram-groups/';
 
+  function scrollingEnabled(): boolean {
+    if (props.page === 'home' || props.page === 'groups') return false;
+    return true;
+  }
+
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <TopNavbar page={props.page} setSearchInput={setSearchInput} />
-        {props.page === 'home' ? (
-          <Home />
-        ) : props.page === 'channels' ? (
-          <Channels API={API} searchInput={searchInput} />
-        ) : props.page === 'groups' ? (
-          <Groups />
-        ) : props.page === 'bachelor' ? (
-          <Bachelor API={API} searchInput={searchInput} />
-        ) : props.page === 'master' ? (
-          <Master API={API} searchInput={searchInput} />
-        ) : props.page === 'bots' ? (
-          <Bots API={API} searchInput={searchInput} />
-        ) : (
-          <Home />
-        )}
-        <div className='credits'>
-          Coded by
-          <a href='https://github.com/Lorenzo-Pappalardo'>Lorenzo Pappalardo</a>
-          <a href='https://github.com/Helias'>Stefano Borzì</a>
-          <a href='https://github.com/Gigi-G'>Luigi Seminara</a>
+      <IonContent fullscreen scrollY={scrollingEnabled()}>
+        <div className='base'>
+          <TopNavbar page={props.page} setSearchInput={setSearchInput} />
+          <div className='content'>
+            {props.page === 'home' ? (
+              <Home />
+            ) : props.page === 'channels' ? (
+              <Channels API={API} searchInput={searchInput} />
+            ) : props.page === 'groups' ? (
+              <Groups />
+            ) : props.page === 'bachelor' ? (
+              <Bachelor API={API} searchInput={searchInput} />
+            ) : props.page === 'master' ? (
+              <Master API={API} searchInput={searchInput} />
+            ) : props.page === 'bots' ? (
+              <Bots API={API} searchInput={searchInput} />
+            ) : (
+              <Home />
+            )}
+          </div>
+          <div className='credits'>
+            Coded by
+            <a href='https://github.com/Lorenzo-Pappalardo'>Lorenzo Pappalardo</a>
+            <a href='https://github.com/Helias'>Stefano Borzì</a>
+            <a href='https://github.com/Gigi-G'>Luigi Seminara</a>
+          </div>
         </div>
       </IonContent>
     </IonPage>

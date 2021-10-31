@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import './Home.scss';
 
 const Home: React.FC = () => (
-  <IonGrid fixed className='grid'>
+  <IonGrid>
     <IonRow>
-      <IonCol className='ion-align-self-center'>
+      <IonCol>
         <Link to='/channels' className='link'>
           <IonCard className='card'>
             <IonCardHeader>
@@ -14,7 +14,7 @@ const Home: React.FC = () => (
           </IonCard>
         </Link>
       </IonCol>
-      <IonCol className='ion-align-self-center'>
+      <IonCol>
         <Link to='/groups' className='link'>
           <IonCard className='card'>
             <IonCardHeader>
