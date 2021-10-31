@@ -7,6 +7,16 @@
   padding: 3vh;
   background-color: colors.$cards-background;
 
+  .links {
+    * {
+      display: inline-block;
+      margin: 0.5rem;
+      margin-left: 1rem;
+      text-decoration: none;
+      color: colors.$texts;
+    }
+  }
+
   label {
     color: colors.$texts;
   }
@@ -20,25 +30,15 @@
   }
 }
 
-.links {
-  * {
-    display: inline-block;
-    margin: 0.5rem;
-    margin-left: 1rem;
-    text-decoration: none;
-    color: colors.$texts;
-  }
-}
-
 @media screen and (max-width: 634px) {
   .navbar {
     display: block;
-  }
 
-  .links {
-    * {
-      display: block;
-      margin-left: 0;
+    .links {
+      * {
+        display: block;
+        margin-left: 0;
+      }
     }
   }
 }
