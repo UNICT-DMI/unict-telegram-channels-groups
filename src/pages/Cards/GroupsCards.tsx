@@ -17,8 +17,8 @@ const GroupsCards: React.FC<GroupsProps> = (props: GroupsProps) => {
     <div className='cards' key={props.title}>
       <ul className='all-cards-contents'>
         <div className='images-and-rankings'>
-          <a href={props.link}>
-            <img className='images' src={props.picture} alt={`${props.title}`} />
+          <a className='images' href={props.link}>
+            <img src={props.picture} alt={`${props.title}`} />
           </a>
           <h2 className='rankings'>{props.isSearch ? '' : `${props.ranking}°`}</h2>
         </div>
