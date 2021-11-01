@@ -80,7 +80,7 @@ const Channels: React.FC<ChannelProps> = (props: ChannelProps) => {
   return (
     <>
       {loading ? (
-        <img src='loading.gif' className='loading' alt='loading' />
+        <img src={process.env.PUBLIC_URL + '/loading.gif'} className='loading' alt='loading' />
       ) : (
         <div className='contents-grid'>
           {channelsArray.map(

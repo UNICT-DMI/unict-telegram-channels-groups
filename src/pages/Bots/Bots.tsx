@@ -70,7 +70,12 @@ const Bots: React.FC<BotsProps> = (props: BotsProps) => {
   return (
     <div>
       {loading ? (
-        <img src='loading.gif' className='loading' key='loading' alt='loading' />
+        <img
+          src={process.env.PUBLIC_URL + '/loading.gif'}
+          className='loading'
+          key='loading'
+          alt='loading'
+        />
       ) : (
         <div className='contents-grid'>
           {botsArray.map(

@@ -54,7 +54,7 @@ const Master: React.FC<MasterProps> = (props: MasterProps) => {
         newGroupEntry.description = data.description;
 
         if (data.image_link === '') {
-          newGroupEntry.pictureURL = 'telegram.svg';
+          newGroupEntry.pictureURL = process.env.PUBLIC_URL + '/telegram.svg';
         } else {
           const tmpPic: string = data.image_link;
           newGroupEntry.pictureURL = tmpPic.substring(1);
@@ -104,7 +104,12 @@ const Master: React.FC<MasterProps> = (props: MasterProps) => {
   return (
     <div>
       {loading ? (
-        <img src='loading.gif' className='loading' key='loading' alt='loading' />
+        <img
+          src={process.env.PUBLIC_URL + '/loading.gif'}
+          className='loading'
+          key='loading'
+          alt='loading'
+        />
       ) : (
         <div>
           {arrays.map((specificArray) => (
