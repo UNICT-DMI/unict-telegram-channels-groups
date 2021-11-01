@@ -2,6 +2,7 @@
   "name": "UNICT-Telegram-Channels-Groups",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://unict-dmi.github.io/unict-telegram-channels-groups",
   "dependencies": {
     "@capacitor/android": "3.2.5",
     "@capacitor/app": "1.0.5",
