@@ -1,6 +1,6 @@
 {
   "name": "UNICT-Telegram-Channels-Groups",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@capacitor/android": "3.2.5",
@@ -45,6 +45,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -67,7 +69,7 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "3.2.5"
-  },
-  "description": "An Ionic project"
+    "@capacitor/cli": "3.2.5",
+    "gh-pages": "^3.2.3"
+  }
 }
