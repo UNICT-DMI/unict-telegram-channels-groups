@@ -16,7 +16,8 @@ jobs:
       - name: Set Node version
         uses: actions/setup-node@v4
         with:
-          node-version: '12.x'
+          node-version: '24.x'
+          check-latest: true
 
       - name: Install dependencies
         run: npm install
@@ -32,3 +33,7 @@ jobs:
           email: 'github-actions[bot]@users.noreply.github.com'
           token: ${{ secrets.GHPAGES_TOKEN }}
           repository: ${{ github.repository }}
+          # react-scripts 4 on Node 18+: webpack 4 needs the legacy OpenSSL
+          # provider, and source map generation breaks on the global fetch
+          NODE_OPTIONS: --openssl-legacy-provider
+          GENERATE_SOURCEMAP: false
